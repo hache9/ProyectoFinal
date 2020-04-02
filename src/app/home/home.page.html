@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      SOLVAM - Bolsa de Trabajo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-img id="img" src="../assets/img/logo2.png"></ion-img>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="stacked">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input type="text" type="email" placeholder="EMAIL" [(ngModel)]="user"></ion-input>
+  </ion-item>
+  <p class="red">{{userfail}}</p>
+
+  <ion-item>
+    <ion-label position="stacked">Password <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input type="text"  type="password" placeholder="PASSWORD" [(ngModel)]="pass"></ion-input>
+  </ion-item>
+  <p class="red">{{passfail}}</p>
+
+  <ion-item>
+    <a id="forget" (click)="onClickForgot()">{{forgot}}</a>
+  </ion-item>
+
+  <ion-item>
+    <ion-button id="login" type="submit" class="ion-no-margin" (click)="onClickLogin()">Login</ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-button id="loginFace" type="submit" class="ion-no-margin" (click)="onClickLoginFacebook()" shape="round">
+      Login with Facebook <ion-icon name="logo-facebook"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <ion-item>
+    <p id="register" (click)="goRegister()">Sign up</p>
+  </ion-item>
+
+</ion-content>
