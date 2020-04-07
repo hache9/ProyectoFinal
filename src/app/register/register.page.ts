@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from './../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +17,8 @@ export class RegisterPage implements OnInit {
   checkEmpresa:boolean=false;
   tipopass:string="password";
 
-  constructor() { }
+  constructor(private service:AuthenticationService,
+    private router:Router) { }
 
   ngOnInit() {
   }
@@ -40,11 +43,40 @@ export class RegisterPage implements OnInit {
     if(this.user.trim()!="" && this.pass.trim()!=""){
       console.log(this.user);
       console.log(this.pass);
-      if(this.checkAdmin==true){
+
+      if(this.checkAdmin==true && this.checkEmpresa==false || this.checkAdmin==true && this.checkEmpresa==true){
         console.log(this.checkAdmin);
+        this.service.createUserAdmin(this.user, this.pass, this.checkAdmin, this.checkEmpresa).then(() => {
+          console.log("Usuario Admin creado correctamente");
+          
+        }, error => {
+          console.log(error);
+        });
       }
-      if(this.checkEmpresa==true){
+      if(this.checkEmpresa==true && this.checkAdmin==false){
         console.log(this.checkEmpresa);
+        this.service.createUserEmpresa(this.user, this.pass, this.checkAdmin, this.checkEmpresa).then(() => {
+          console.log("Usuario Empresa creado correctamente");
+          
+        }, error => {
+          console.log(error);
+        });
+      }
+      if(this.checkEmpresa==false && this.checkAdmin==false){
+        console.log(this.checkEmpresa);
+        this.service.createUserAlumno(this.user, this.pass, this.checkAdmin, this.checkEmpresa).then(() => {
+          console.log("Usuario creado correctamente");
+          
+        }, error => {
+          console.log(error);
+        });
+
+        this.user="";
+        this.pass="";
+        this.checkEmpresa==false;
+        this.checkAdmin==false;
+        this.router.navigateByUrl('/home');
+
       }
     }
   }

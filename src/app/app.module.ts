@@ -14,6 +14,8 @@ import { firebaseConfig } from './../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,7 +25,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     //Iniciar la app con firebase
     AngularFireModule.initializeApp(firebaseConfig),
     //Autentificar(utilizar modulo de autenticación)
-    AngularFireAuthModule,],
+    AngularFireAuthModule,
+    AngularFirestoreModule],
   providers: [
     StatusBar,
     SplashScreen,

@@ -2,6 +2,6 @@ export interface User{
     id:string;
     mail:string;
     password:string;
-    administrador:boolean;
+    admin:boolean;
     empresa:boolean;
 }
