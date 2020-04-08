@@ -21,14 +21,14 @@ export class AuthenticationService {
     private db:AngularFirestore
     ) { }
 
-  async createUserAdmin(mail:string, password:string, admin:boolean, empresa:boolean){
+  async createUserAdmin(mail:string, password:string, admin:boolean){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
       .then((newCredential:firebase.auth.UserCredential) => {
         //para que funcione firestore
         this.user.mail=mail;
         this.user.password=password;
         this.user.admin=admin;
-        this.user.empresa=empresa;
+        //this.user.empresa=empresa;
         this.createUser(this.user);
         console.log(newCredential);
       })

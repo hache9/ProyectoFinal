@@ -4,6 +4,7 @@ import {AuthenticationService} from '../services/authentication.service';
 import {AngularFirestoreCollection,AngularFirestore} from '@angular/fire/firestore';
 import {User} from '../models/user.interface';
 import { AlertController } from '@ionic/angular';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomePage {
   constructor(private router: Router,
     private authservice: AuthenticationService,
     private db: AngularFirestore,
-    private alertController:AlertController) {}
+    private alertController:AlertController,
+    private toastService:ToastService) {}
 
   
   async goRegister() {
@@ -47,9 +49,10 @@ export class HomePage {
         console.log(this.user);
         sessionStorage.setItem("user", this.user);
         console.log("Usuario logueado correctamente");
+        //Toast generado en servicio
+        this.toastService.presentToast("Usuario logueado correctamente");
 
-
-
+        
         var usermail = sessionStorage.getItem('user');
         //recorrer usuarios de firestone 
         let usersCollection: AngularFirestoreCollection = this.db.collection < User > ('users');
@@ -85,6 +88,16 @@ export class HomePage {
 
       }, error => {
         console.log(error);
+
+        //Condiciones de mensaje de error.
+        if(error.message.includes("email") || error.message.includes("user") ){
+          //Toast generado en servicio
+          this.toastService.presentToast("El usuario no existe");
+        }
+        if(error.message.includes("pass")){
+          //Toast generado en servicio
+          this.toastService.presentToast("Contraseña incorrecta");
+        }
       });
     }
   }
@@ -117,10 +130,11 @@ export class HomePage {
             //Forgot user
             this.authservice.forgotUser(alertData.email).then(() => {
             console.log("Correo enviado correctamente");
-
+            this.toastService.presentToast("Correo enviado correctamente");
         }, error => {
             console.log(error);
             console.log("Error, correo no existente");
+            this.toastService.presentToast("Error, correo no existente");
           });
         }
       }

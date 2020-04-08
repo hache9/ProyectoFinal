@@ -21,11 +21,17 @@
 
   <ion-item>
     <ion-label>Administrador</ion-label>
-    <ion-checkbox (ionChange)="setAdmin()" checked={{checkAdmin}} slot="start"></ion-checkbox>
+    <ion-checkbox (ionChange)="setAdmin()" checked={{checkAdmin}} [(ngModel)]="admin" slot="start"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-input type="{{tipopass}}" placeholder="Admin Password" expand="short" [(ngModel)]="adminPass" *ngIf="admin"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Empresa</ion-label>
-    <ion-checkbox (ionChange)="setEmpresa()" checked={{checkEmpresa}} slot="start"></ion-checkbox>
+    <ion-checkbox (ionChange)="setEmpresa()" checked={{checkEmpresa}} [(ngModel)]="empresa" slot="start"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-input type="{{tipopass}}" placeholder="Empresa Password" expand="short" [(ngModel)]="empresaPass" *ngIf="empresa"></ion-input>
   </ion-item>
   <ion-button expand="block" (click)="onClickSaveRegister()">Save</ion-button>
 </ion-content>
