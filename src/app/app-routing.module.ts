@@ -7,7 +7,23 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },  {
+    path: 'registeradmin',
+    loadChildren: () => import('./registeradmin/registeradmin.module').then( m => m.RegisteradminPageModule)
   },
+  {
+    path: 'registerempresa',
+    loadChildren: () => import('./registerempresa/registerempresa.module').then( m => m.RegisterempresaPageModule)
+  },
+  {
+    path: 'registeralumno',
+    loadChildren: () => import('./registeralumno/registeralumno.module').then( m => m.RegisteralumnoPageModule)
+  },
+  {
+    path: 'principalempresa',
+    loadChildren: () => import('./principalempresa/principalempresa.module').then( m => m.PrincipalempresaPageModule)
+  },
+
 ];
 
 @NgModule({

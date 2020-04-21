@@ -54,9 +54,9 @@ export class HomePage {
 
         
         var usermail = sessionStorage.getItem('user');
-        //recorrer usuarios de firestone 
-        let usersCollection: AngularFirestoreCollection = this.db.collection < User > ('users');
-        usersCollection.valueChanges().subscribe(
+        //recorrer usuarios de firestone para los administradores
+        let usersCollectionAdmin: AngularFirestoreCollection = this.db.collection < User > ('admin');
+        usersCollectionAdmin.valueChanges().subscribe(
           res => {
             res.forEach(element => {
               //admin
@@ -67,20 +67,35 @@ export class HomePage {
                 //this.router.navigateByUrl('/register');
                 console.log("admin");
               }
+            });
+          });
+        //recorrer usuarios de firestone para las empresas
+        let usersCollectionEmpresa: AngularFirestoreCollection = this.db.collection < User > ('empresa');
+        usersCollectionEmpresa.valueChanges().subscribe(
+          res => {
+            res.forEach(element => {
               //empresa
               if (element.userInfo.mail == usermail && element.userInfo.admin==false && element.userInfo.empresa==true) {
                 //guardar el user y la id en sessionstorage
                 sessionStorage.setItem("userId", element.userInfo.id);
                 sessionStorage.setItem("user", this.user);
-                //this.router.navigateByUrl('/home');
+                this.router.navigateByUrl('/principalempresa');
                 console.log("empresa");
               }
+            });
+          });
+
+          //recorrer usuarios de firestone para los alumnos
+        let usersCollectionAlumno: AngularFirestoreCollection = this.db.collection < User > ('alumno');
+        usersCollectionAlumno.valueChanges().subscribe(
+          res => {
+            res.forEach(element => {
               //alumno
               if (element.userInfo.mail == usermail && element.userInfo.admin==false && element.userInfo.empresa==false) {
                 //guardar el user y la id en sessionstorage
                 sessionStorage.setItem("userId", element.userInfo.id);
                 sessionStorage.setItem("user", this.user);
-                //this.router.navigateByUrl('/home');
+                //this.router.navigateByUrl('/registeralumno');
                 console.log("alumno");
               }
             });

@@ -1,0 +1,68 @@
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from './../services/authentication.service';
+import { Router } from '@angular/router';
+import { ToastService } from '../services/toast.service';
+
+@Component({
+  selector: 'app-registeralumno',
+  templateUrl: './registeralumno.page.html',
+  styleUrls: ['./registeralumno.page.scss'],
+})
+export class RegisteralumnoPage implements OnInit {
+
+  user:string="";
+  pass:string="";
+  userfail:string="";
+  passfail:string="";
+  checkAdmin:boolean=false;
+  checkEmpresa:boolean=false;
+  tipopass:string="password";
+
+  constructor(private service:AuthenticationService,
+    private router:Router,
+    private toastService:ToastService) { }
+
+  ngOnInit() {
+  }
+
+  onClickSaveRegister(){
+    if(this.user.trim()==""){
+      this.userfail="Please, enter name.";
+    }else{
+      this.userfail="";
+    }
+    if(this.pass.trim()==""){
+      this.passfail="Please, enter pass.";
+    }else{
+      this.passfail="";
+    }
+    if(this.user.trim()!="" && this.pass.trim()!=""){
+      console.log(this.user);
+      console.log(this.pass);
+      
+        this.service.createUserAlumno(this.user, this.pass).then(() => {
+          console.log("Usuario creado correctamente");
+          //Toast generado en servicio
+          this.toastService.presentToast("Usuario creado correctamente");
+          this.user="";
+          this.pass="";
+          this.router.navigateByUrl('/home');
+        }, error => {
+          console.log(error);
+          //Toast generado en servicio
+          this.toastService.presentToast("Error al crear el Usuario");
+          });        
+      }
+    }
+    
+  //El ojo, crear tipopass en password y se hace la condicion.(Esta declarado en el html)
+  onClickEye(){
+    if(this.tipopass=="password"){
+        this.tipopass="text";
+    }else{
+        this.tipopass="password"
+    }
+  }
+
+
+}

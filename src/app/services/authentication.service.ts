@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from './../models/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,27 +19,11 @@ export class AuthenticationService {
   }
 
   constructor(private afAuth:AngularFireAuth,
-    private db:AngularFirestore
+    private db:AngularFirestore,
+    private userService:UserService
     ) { }
 
-  async createUserAdmin(mail:string, password:string, admin:boolean){
-    return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
-      .then((newCredential:firebase.auth.UserCredential) => {
-        //para que funcione firestore
-        this.user.mail=mail;
-        this.user.password=password;
-        this.user.admin=admin;
-        //this.user.empresa=empresa;
-        this.createUser(this.user);
-        console.log(newCredential);
-      })
-      .catch(error => {
-        console.log(error);
-        throw new Error(error);
-      });
-  }
-
-  async createUserEmpresa(mail:string, password:string, admin:boolean, empresa:boolean){
+  async createUserAdmin(mail:string, password:string, admin:boolean, empresa:boolean){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
       .then((newCredential:firebase.auth.UserCredential) => {
         //para que funcione firestore
@@ -46,7 +31,7 @@ export class AuthenticationService {
         this.user.password=password;
         this.user.admin=admin;
         this.user.empresa=empresa;
-        this.createUser(this.user);
+        this.userService.userAdmin(this.user);
         console.log(newCredential);
       })
       .catch(error => {
@@ -55,15 +40,15 @@ export class AuthenticationService {
       });
   }
 
-  async createUserAlumno(mail:string, password:string, admin:boolean, empresa:boolean){
+  async createUserEmpresa(mail:string, password:string){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
       .then((newCredential:firebase.auth.UserCredential) => {
         //para que funcione firestore
         this.user.mail=mail;
         this.user.password=password;
-        this.user.admin=admin;
-        this.user.empresa=empresa;
-        this.createUser(this.user);
+        this.user.admin=false;
+        this.user.empresa=true;
+        this.userService.userEmpresa(this.user);
         console.log(newCredential);
       })
       .catch(error => {
@@ -72,10 +57,21 @@ export class AuthenticationService {
       });
   }
 
-  //Se crea una funcion para meter usuario en firestore.
-  async createUser(userInfo:User){
-    userInfo.id=this.db.createId();
-    this.db.doc("users/" + userInfo.id).set({userInfo});
+  async createUserAlumno(mail:string, password:string){
+    return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
+      .then((newCredential:firebase.auth.UserCredential) => {
+        //para que funcione firestore
+        this.user.mail=mail;
+        this.user.password=password;
+        this.user.admin=false;
+        this.user.empresa=false;
+        this.userService.userAlumno(this.user);
+        console.log(newCredential);
+      })
+      .catch(error => {
+        console.log(error);
+        throw new Error(error);
+      });
   }
 
   async loginUser(mail:string, password:string){

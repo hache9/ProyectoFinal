@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mostrar Alumnos</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClickClose()">Log out</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon id="filter" name="funnel" (click)="onClickFilter()"></ion-icon>
+      <ion-icon></ion-icon>
+      <ion-icon name="star" (click)="onClickFav()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-sliding *ngFor="let alumno of alumnosLista">  
+    <ion-item>             
+        <ion-label>
+          <h1>{{alumno.userInfo.mail}}</h1>
+          <h2>{{alumno.userInfo.password}}</h2>
+        </ion-label>
+        <!--<img id="img" src="{{alumno.userInfo.image}}">-->
+    </ion-item>
+
+    <ion-item-options side="end" class="centrar">
+      <ion-item-option expandable (click)="onClickFavorito(alumno.userInfo)">
+        <ion-icon name="star" slot="end"></ion-icon>
+        Favorito
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+
+</ion-content>

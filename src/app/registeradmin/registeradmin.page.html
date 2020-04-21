@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registrar Administrador</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-input placeholder="EMAIL" [(ngModel)]="user" expand="short"></ion-input>
+    <p class="red">{{userfail}}</p>
+  </ion-item>
+  
+  <ion-item>
+    <ion-input type="{{tipopass}}" placeholder="PASSWORD" [(ngModel)]="pass"></ion-input>
+    <p class="red">{{passfail}}</p>
+    <ion-icon id="ojo" name="eye" (click)="onClickEye()"></ion-icon>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Administrador</ion-label>
+    <ion-checkbox (ionChange)="setAdmin()" checked={{checkAdmin}} [(ngModel)]="admin" slot="start"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-input type="{{tipopass}}" placeholder="Admin Password" expand="short" [(ngModel)]="adminPass" *ngIf="admin"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="onClickSaveRegister()">Save</ion-button>
+</ion-content>
