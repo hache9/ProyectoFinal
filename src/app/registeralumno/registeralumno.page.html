@@ -18,6 +18,54 @@
     <p class="red">{{passfail}}</p>
     <ion-icon id="ojo" name="eye" (click)="onClickEye()"></ion-icon>
   </ion-item>
+
+  <ion-item>
+    <img id="img" src="{{nuevaImagen}}" (click)="onClickSelectImage()">
+  </ion-item>
+
+  <ion-item>
+    <ion-label >Nombre y apellidos:<ion-text color="danger">*</ion-text></ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-input required type="text" [(ngModel)]="nuevoNombre"></ion-input>
+  </ion-item>
+  <p class="red">{{nombreVacio}}</p>
+
+  <ion-item>
+    <ion-label >Edad:<ion-text color="danger">*</ion-text></ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-input required type="number" [(ngModel)]="nuevaEdad"></ion-input>
+  </ion-item>
+  <p class="red">{{edadVacia}}</p>
+
+  <ion-item>
+    <ion-label position="fixed">Curso:<ion-text color="danger">*</ion-text></ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-input required type="text" [(ngModel)]="nuevoCurso"></ion-input>
+  </ion-item>
+  <p class="red">{{cursoVacio}}</p>
+
+  <ion-item>
+    <ion-label>Idiomas:<ion-text color="danger">*</ion-text></ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-input required type="text" [(ngModel)]="nuevosIdiomas"></ion-input>
+  </ion-item>
+  <p class="red">{{idiomasVacio}}</p>
+
+  <ion-item>
+    <ion-label>Otros datos de interés:<ion-text color="danger">*</ion-text></ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-input required type="text" [(ngModel)]="nuevosDatos"></ion-input>
+  </ion-item>
+  <p class="red">{{datosVacio}}</p>
   
-  <ion-button expand="block" (click)="onClickSaveRegister()">Save</ion-button>
+  <ion-item>
+    <ion-label position="fixed">PDF<ion-text color="danger">*</ion-text></ion-label>
+  </ion-item>
+
+  <ion-button expand="block" (click)="onClickSaveRegister()">Registrar Alumno</ion-button>
 </ion-content>

@@ -3,6 +3,7 @@ import { User } from './../models/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserService } from './user.service';
+import { UserAlumno } from '../models/userAlumno.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,19 @@ export class AuthenticationService {
     admin:false,
     empresa:false
   }
+
+  userAlumno:UserAlumno={
+    id:"",
+    mail:"",
+    password:"",
+    nombreyapellidos:"",
+    edad:"",
+    curso:"",
+    idiomas:"",
+    datos:"",
+    admin:false,
+    empresa:false
+}
 
   constructor(private afAuth:AngularFireAuth,
     private db:AngularFirestore,
@@ -57,15 +71,20 @@ export class AuthenticationService {
       });
   }
 
-  async createUserAlumno(mail:string, password:string){
+  async createUserAlumno(mail:string, password:string, nombreyapellidos:string, edad:string, curso:string, idiomas:string, datos:string ){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
       .then((newCredential:firebase.auth.UserCredential) => {
         //para que funcione firestore
-        this.user.mail=mail;
-        this.user.password=password;
-        this.user.admin=false;
-        this.user.empresa=false;
-        this.userService.userAlumno(this.user);
+        this.userAlumno.mail=mail;
+        this.userAlumno.password=password;
+        this.userAlumno.nombreyapellidos=nombreyapellidos;
+        this.userAlumno.edad=edad;
+        this.userAlumno.curso=curso;
+        this.userAlumno.idiomas=idiomas;
+        this.userAlumno.datos=datos;
+        this.userAlumno.admin=false;
+        this.userAlumno.empresa=false;
+        this.userService.userAlumno(this.userAlumno);
         console.log(newCredential);
       })
       .catch(error => {

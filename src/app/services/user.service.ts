@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../models/user.interface';
+import { UserAlumno } from '../models/userAlumno.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class UserService {
   }
 
   //Se crea una funcion para meter usuario en firestore.
-  async userAlumno(userInfo:User){
+  async userAlumno(userInfo:UserAlumno){
     userInfo.id=this.db.createId();
     this.db.doc("alumno/" + userInfo.id).set({userInfo});
   }
