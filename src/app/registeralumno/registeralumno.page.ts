@@ -1,7 +1,10 @@
+import { UserAlumno } from './../models/userAlumno.interface';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './../services/authentication.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../services/toast.service';
+import { ModalController } from '@ionic/angular';
+import { GaleryComponent } from '../galery/galery.component';
 
 @Component({
   selector: 'app-registeralumno',
@@ -33,7 +36,8 @@ export class RegisteralumnoPage implements OnInit {
 
   constructor(private service:AuthenticationService,
     private router:Router,
-    private toastService:ToastService) { }
+    private toastService:ToastService,
+    private modalController:ModalController) { }
 
   ngOnInit() {
   }
@@ -102,5 +106,18 @@ export class RegisteralumnoPage implements OnInit {
     }
   }
 
+  async onClickSelectImage(){
+    console.log("Seleccionar imagen");
+    const modal = await this.modalController.create({
+      component: GaleryComponent,
+      cssClass: "gallery-modal",
+      componentProps:{
+        //'restaurant': JSON.stringify(this.restaurant)
+      }
+    });
+      await modal.present();
+      const data=await modal.onDidDismiss();
+      //this.newImage=data.data;
+  }
 
 }

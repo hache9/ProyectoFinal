@@ -16,9 +16,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+import { GaleryComponent } from './galery/galery.component';
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, GaleryComponent],
+  entryComponents: [GaleryComponent],
   imports: [BrowserModule, 
     IonicModule.forRoot(),
      AppRoutingModule,
@@ -30,6 +32,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
   providers: [
     StatusBar,
     SplashScreen,
+    GaleryComponent,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Select Image</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClickClose()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+      <p>You can select image from gallery or take your own photography.</p>
+  </ion-item>
+  <ion-item>
+    <ion-button id="gallery" (click)="onClickOpenGallery()">Gallery</ion-button>
+    <ion-button id="camera" (click)="onClickOpenCamera()">Camera</ion-button>
+  </ion-item>
+
+</ion-content>
