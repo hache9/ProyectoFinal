@@ -20,6 +20,8 @@ import { GaleryComponent } from './galery/galery.component';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';
 
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
 
 @NgModule({
   declarations: [AppComponent, GaleryComponent],
@@ -36,6 +38,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
     StatusBar,
     SplashScreen,
     GaleryComponent,
+    Camera,
     AngularFireStorage,
     ImagePicker,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
