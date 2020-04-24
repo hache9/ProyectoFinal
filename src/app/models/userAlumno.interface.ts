@@ -4,6 +4,7 @@ export interface UserAlumno{
     password:string;
     admin:boolean;
     empresa:boolean;
+    imagen:string;
     nombreyapellidos:string;
     edad:string;
     curso:string;

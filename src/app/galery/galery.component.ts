@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { finalize } from 'rxjs/operators';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { UserAlumno } from '../models/userAlumno.interface';
+import { ModalController, LoadingController, NavParams } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-galery',
@@ -7,8 +13,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GaleryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private imagePicker: ImagePicker,
+    private storage:AngularFireStorage,
+    private modalController:ModalController,
+    private loadingController:LoadingController,
+    private navParams:NavParams) { }
 
-  ngOnInit() {}
+  optionsGallery = {
+    maximumImagesCount: 1,
+    width:800,
+    height:800,
+    quality:100,
+    outputType:1
+  }
+
+  userAlumno:UserAlumno;
+  imageUrl:string;
+  ngOnInit() {this.userAlumno=JSON.parse(this.navParams.get('alumno'));}
+
+  onClickClose(){
+    this.modalController.dismiss("../../assets/img/noimage.png");
+  }
+
+  onClickOpenGallery(){
+    this.imagePicker.getPictures(this.optionsGallery).then(async (imageData) => {
+      const loading = await this.loadingController.create({
+        message: 'Please wait...',
+        duration: 1000
+      });
+      await loading.present();
+
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+  
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+  
+      let photoName = `${this.userAlumno.id}/${this.userAlumno.id}_photo`;
+  
+      const fileRef = this.storage.ref(photoName);
+  
+      const task = fileRef.putString(base64Image,'data_url');
+  
+       task.snapshotChanges().pipe(
+         finalize(() => {
+           fileRef.getDownloadURL().subscribe(async url => {
+            this.imageUrl=url;
+            //alert(this.imageUrl);
+            loading.dismiss();
+            this.modalController.dismiss(this.imageUrl);
+           })
+         })).subscribe();
+  
+      }, (err) => { alert(err) });
+  }
 
 }

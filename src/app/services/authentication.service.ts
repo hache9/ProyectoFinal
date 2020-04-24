@@ -23,6 +23,7 @@ export class AuthenticationService {
     id:"",
     mail:"",
     password:"",
+    imagen:"",
     nombreyapellidos:"",
     edad:"",
     curso:"",
@@ -71,13 +72,14 @@ export class AuthenticationService {
       });
   }
 
-  async createUserAlumno(mail:string, password:string, nombreyapellidos:string, edad:string, curso:string, idiomas:string, datos:string ){
+  async createUserAlumno(mail:string, password:string, imagen:string, nombreyapellidos:string, edad:string, curso:string, idiomas:string, datos:string ){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
       .then((newCredential:firebase.auth.UserCredential) => {
         //para que funcione firestore
         this.userAlumno.mail=mail;
         this.userAlumno.password=password;
         this.userAlumno.nombreyapellidos=nombreyapellidos;
+        this.userAlumno.imagen=imagen;
         this.userAlumno.edad=edad;
         this.userAlumno.curso=curso;
         this.userAlumno.idiomas=idiomas;

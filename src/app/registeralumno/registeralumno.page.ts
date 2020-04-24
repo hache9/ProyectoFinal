@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastService } from '../services/toast.service';
 import { ModalController } from '@ionic/angular';
 import { GaleryComponent } from '../galery/galery.component';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-registeralumno',
@@ -34,10 +35,25 @@ export class RegisteralumnoPage implements OnInit {
   idiomasVacio:string="";
   datosVacio:string="";
 
+  userAlumno:UserAlumno={
+    id:"",
+    mail:"",
+    password:"",
+    admin:false,
+    empresa:false,
+    imagen:"",
+    nombreyapellidos:"",
+    edad:"",
+    curso:"",
+    idiomas:"",
+    datos:"",
+}
+
   constructor(private service:AuthenticationService,
     private router:Router,
     private toastService:ToastService,
-    private modalController:ModalController) { }
+    private modalController:ModalController,
+    private db:AngularFirestore) { }
 
   ngOnInit() {
   }
@@ -82,7 +98,7 @@ export class RegisteralumnoPage implements OnInit {
       console.log(this.user);
       console.log(this.pass);
       
-        this.service.createUserAlumno(this.user, this.pass, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevosIdiomas, this.nuevosDatos).then(() => {
+        this.service.createUserAlumno(this.user, this.pass, this.nuevaImagen, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevosIdiomas, this.nuevosDatos).then(() => {
           console.log("Usuario creado correctamente");
           //Toast generado en servicio
           this.toastService.presentToast("Usuario creado correctamente");
@@ -107,17 +123,19 @@ export class RegisteralumnoPage implements OnInit {
   }
 
   async onClickSelectImage(){
+    this.userAlumno.id=this.db.createId();
     console.log("Seleccionar imagen");
     const modal = await this.modalController.create({
       component: GaleryComponent,
       cssClass: "gallery-modal",
       componentProps:{
-        //'restaurant': JSON.stringify(this.restaurant)
+        'alumno': JSON.stringify(this.userAlumno)
       }
     });
       await modal.present();
       const data=await modal.onDidDismiss();
-      //this.newImage=data.data;
+      this.nuevaImagen=data.data;
+      this.toastService.presentToast(this.nuevaImagen);
   }
 
 }
