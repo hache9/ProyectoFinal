@@ -6,20 +6,18 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-icon id="filter" name="funnel" (click)="onClickFilter()"></ion-icon>
-      <ion-icon></ion-icon>
-      <ion-icon name="star" (click)="onClickFav()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item-sliding *ngFor="let alumno of alumnosLista">  
-    <ion-item>             
+    <ion-item (click)="showAlumno(alumno.userInfo)">             
         <ion-label>
-          <h1>{{alumno.userInfo.mail}}</h1>
-          <h2>{{alumno.userInfo.password}}</h2>
+          <h1>{{alumno.userInfo.nombreyapellidos}}</h1>
+          <h2>{{alumno.userInfo.curso}}</h2>
         </ion-label>
-        <!--<img id="img" src="{{alumno.userInfo.image}}">-->
+        <img id="img" src="{{alumno.userInfo.imagen}}">
     </ion-item>
 
     <ion-item-options side="end" class="centrar">

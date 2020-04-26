@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Filter</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClickClose()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <p>To clear filter, press button with empty inputs.</p>
+  </ion-item>
+
+  <ion-item>
+    <ion-searchbar placeholder="Busca por nombre:" [(ngModel)]="filtrarNombre"></ion-searchbar>
+  </ion-item>
+
+  <ion-item>
+    <ion-searchbar placeholder="Busca por edad:" [(ngModel)]="filtrarEdad"></ion-searchbar>
+  </ion-item>
+
+  <ion-item>
+    <ion-searchbar placeholder="Busca por curso:" [(ngModel)]="filtrarCurso"></ion-searchbar>
+  </ion-item>
+
+  <ion-item>
+    <ion-searchbar placeholder="Busca por idiomas:" [(ngModel)]="filtrarIdiomas"></ion-searchbar>
+  </ion-item>
+
+  <ion-item>
+    <ion-button id="filter" (click)="onClickFilterAccept()">Filter</ion-button>
+  </ion-item>
+</ion-content>

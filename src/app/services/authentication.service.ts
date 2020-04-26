@@ -30,7 +30,7 @@ export class AuthenticationService {
     idiomas:"",
     datos:"",
     admin:false,
-    empresa:false
+    empresa:false,
 }
 
   constructor(private afAuth:AngularFireAuth,

@@ -1,7 +1,12 @@
+import { UserService } from './../services/user.service';
+import { UserAlumno } from './../models/userAlumno.interface';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../models/user.interface';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { FilterComponent } from '../filter/filter.component';
+
 
 @Component({
   selector: 'app-principalempresa',
@@ -11,7 +16,10 @@ import { Router } from '@angular/router';
 export class PrincipalempresaPage implements OnInit {
 
   constructor(private db:AngularFirestore,
-    private router:Router) { }
+    private router:Router,
+    private userService:UserService,
+    private modalController:ModalController,
+    private filter:FilterComponent) { }
 
   alumnosLista:any;
 
@@ -24,6 +32,26 @@ export class PrincipalempresaPage implements OnInit {
     )
   }
 
+  showAlumno(userAlumno:UserAlumno){
+    console.log(userAlumno);
+    this.router.navigate(['mostraralumno', {userAlumno: JSON.stringify(userAlumno)}]);
+  }
+
+  async onClickFilter(){
+    const modal = await this.modalController.create({
+      component: FilterComponent,
+      cssClass: "modal-css"
+    });
+      await modal.present();
+      const data=await modal.onDidDismiss();
+      this.alumnosLista=data.data;
+  }
+
+
+  onClickFavorito(alumno:UserAlumno){
+    console.log(alumno.id);
+    this.userService.userFavorito(alumno);
+  }
 
   onClickClose(){
     sessionStorage.removeItem("user");

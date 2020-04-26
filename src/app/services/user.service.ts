@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { User } from '../models/user.interface';
 import { UserAlumno } from '../models/userAlumno.interface';
 
@@ -29,4 +29,21 @@ export class UserService {
     userInfo.id=this.db.createId();
     this.db.doc("alumno/" + userInfo.id).set({userInfo});
   }
+
+  async userFavorito(userFav:UserAlumno){
+    var userId=sessionStorage.getItem('userId');
+    //recorrer usuarios en firestone y comparar con el de sessionstorage
+    let usersCollection:AngularFirestoreCollection=this.db.collection<User>('empresa');
+    usersCollection.valueChanges().subscribe(
+      res=>{
+        res.forEach(element=> {
+            //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
+            if(element.userInfo.id==userId){
+            this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/"+userFav.id).set({userFav});
+            console.log(element.userInfo.id);
+            }
+        });
+      });
+  }
+
 }

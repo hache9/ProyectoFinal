@@ -22,10 +22,13 @@ import { AngularFireStorage } from '@angular/fire/storage';
 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
+import { FormsModule } from '@angular/forms';
+import { FilterComponent } from './filter/filter.component';
+
 
 @NgModule({
-  declarations: [AppComponent, GaleryComponent],
-  entryComponents: [GaleryComponent],
+  declarations: [AppComponent, GaleryComponent, FilterComponent],
+  entryComponents: [GaleryComponent,FilterComponent],
   imports: [BrowserModule, 
     IonicModule.forRoot(),
      AppRoutingModule,
@@ -33,7 +36,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
     AngularFireModule.initializeApp(firebaseConfig),
     //Autentificar(utilizar modulo de autenticación)
     AngularFireAuthModule,
-    AngularFirestoreModule],
+    AngularFirestoreModule,
+    FormsModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -41,6 +45,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
     Camera,
     AngularFireStorage,
     ImagePicker,
+    FilterComponent,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
