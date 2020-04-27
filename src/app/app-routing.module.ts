@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'mostraralumno',
     loadChildren: () => import('./mostraralumno/mostraralumno.module').then( m => m.MostraralumnoPageModule)
   },
+  {
+    path: 'editaralumno',
+    loadChildren: () => import('./editaralumno/editaralumno.module').then( m => m.EditaralumnoPageModule)
+  },
 
 ];
 

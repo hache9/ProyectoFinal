@@ -53,6 +53,9 @@ export class PrincipalempresaPage implements OnInit {
     this.userService.userFavorito(alumno);
   }
 
+  onClickFavPage(){
+    this.router.navigateByUrl('/favoritos');
+  }
   onClickClose(){
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("userId");

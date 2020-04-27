@@ -8,6 +8,7 @@ import { UserAlumno } from '../models/userAlumno.interface';
 })
 export class UserService {
 
+
   constructor(private db:AngularFirestore) { }
 
   
@@ -42,6 +43,27 @@ export class UserService {
             this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/"+userFav.id).set({userFav});
             console.log(element.userInfo.id);
             }
+        });
+      });
+  }
+
+  async editUserAlumno(id:string, userInfo:UserAlumno ){
+    var usermail=sessionStorage.getItem('user');
+    console.log(usermail);
+
+    //recorrer usuarios en firestone y comparar con el de sessionstorage
+    let usersCollection:AngularFirestoreCollection=this.db.collection<User>('alumno');
+    usersCollection.valueChanges().subscribe(
+      res=>{
+        res.forEach(element=> {
+          console.log(usermail);
+          
+          if(element.userInfo.mail==usermail){
+            console.log(id);
+            //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
+            this.db.doc("alumno/"+element.userInfo.id).update({userInfo});
+            usermail=element.userInfo.mail;
+          }
         });
       });
   }

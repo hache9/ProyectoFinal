@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mostrar Alumnos</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClickClose()">Log out</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <img id="img" src="{{alumnoImagen}}" (click)="onClickSelectImage()">
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="fixed">Nombre y Apellidos: <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required type="text" [(ngModel)]="textNombre" expand="short"></ion-input>
+  </ion-item>
+  <p class="red">{{nombreVacio}}</p>
+
+  <ion-item>
+    <ion-label position="fixed">Edad: <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required type="number" [(ngModel)]="textEdad" expand="short"></ion-input>
+  </ion-item>
+  <p class="red">{{edadVacia}}</p>
+
+  <ion-item>
+    <ion-label position="fixed">Curso: <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required type="text" [(ngModel)]="textCurso" expand="short"></ion-input>
+  </ion-item>
+  <p class="red">{{cursoVacio}}</p>
+
+  <ion-item>
+    <ion-label position="fixed">Idiomas: <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required type="text" [(ngModel)]="textIdiomas" expand="short"></ion-input>
+  </ion-item>
+  <p class="red">{{idiomasVacio}}</p>
+
+  <ion-item>
+    <ion-label position="fixed">Otros datos de interés: <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required type="text" [(ngModel)]="textDatos" expand="short"></ion-input>
+  </ion-item>
+  <p class="red">{{datosVacio}}</p>
+
+  <div class="ion-padding">
+    <ion-button expand="block" type="submit" class="ion-no-margin" (click)="onClickEditAlumno()">Guardar Cambios</ion-button>
+  </div>
+
+</ion-content>

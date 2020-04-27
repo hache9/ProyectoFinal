@@ -95,7 +95,7 @@ export class HomePage {
                 //guardar el user y la id en sessionstorage
                 sessionStorage.setItem("userId", element.userInfo.id);
                 sessionStorage.setItem("user", this.user);
-                //this.router.navigateByUrl('/registeralumno');
+                this.router.navigate(['editaralumno', {restaurant: JSON.stringify(element.userInfo)}]);
                 console.log("alumno");
               }
             });
