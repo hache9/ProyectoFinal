@@ -24,21 +24,12 @@
   <p class="red">{{passfail}}</p>
 
   <ion-item>
-    <a id="forget" (click)="onClickForgot()">{{forgot}}</a>
-  </ion-item>
-
-  <ion-item>
     <ion-button id="login" type="submit" class="ion-no-margin" (click)="onClickLogin()">Login</ion-button>
   </ion-item>
 
   <ion-item>
-    <ion-button id="loginFace" type="submit" class="ion-no-margin" (click)="onClickLoginFacebook()" shape="round">
-      Login with Facebook <ion-icon name="logo-facebook"></ion-icon>
-    </ion-button>
-  </ion-item>
-
-  <ion-item>
     <p id="register" (click)="goRegister()">Sign up</p>
+    <a id="forget" (click)="onClickForgot()">{{forgot}}</a>
   </ion-item>
 
 </ion-content>

@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'editaralumno',
     loadChildren: () => import('./editaralumno/editaralumno.module').then( m => m.EditaralumnoPageModule)
   },
+  {
+    path: 'favoritos',
+    loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+  },
 
 ];
 

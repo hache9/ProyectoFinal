@@ -18,8 +18,7 @@ export class PrincipalempresaPage implements OnInit {
   constructor(private db:AngularFirestore,
     private router:Router,
     private userService:UserService,
-    private modalController:ModalController,
-    private filter:FilterComponent) { }
+    private modalController:ModalController) { }
 
   alumnosLista:any;
 

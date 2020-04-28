@@ -24,11 +24,13 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 import { FormsModule } from '@angular/forms';
 import { FilterComponent } from './filter/filter.component';
+import { FavfilterComponent } from './favfilter/favfilter.component';
+
 
 
 @NgModule({
-  declarations: [AppComponent, GaleryComponent, FilterComponent],
-  entryComponents: [GaleryComponent,FilterComponent],
+  declarations: [AppComponent, GaleryComponent, FilterComponent, FavfilterComponent],
+  entryComponents: [GaleryComponent,FilterComponent, FavfilterComponent],
   imports: [BrowserModule, 
     IonicModule.forRoot(),
      AppRoutingModule,
@@ -46,6 +48,7 @@ import { FilterComponent } from './filter/filter.component';
     AngularFireStorage,
     ImagePicker,
     FilterComponent,
+    FavfilterComponent,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
