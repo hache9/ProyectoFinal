@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Principal Administrador</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClickClose()">Log out</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <p>Selecciona el tipo de usuarios que quieras consultar.</p>
+  </ion-item>
+  <ion-item>
+    <ion-button id="empresas" (click)="onClickAbrirEmpresas()">Empresas</ion-button>
+    <ion-button id="alumnos" (click)="onClickAbrirAlumnos()">Alumnos</ion-button>
+  </ion-item>
+</ion-content>

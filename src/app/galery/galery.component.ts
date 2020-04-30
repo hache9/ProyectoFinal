@@ -45,7 +45,7 @@ export class GaleryComponent implements OnInit {
     this.modalController.dismiss("../../assets/img/noimage.png");
   }
 
-  onClickOpenGallery(){
+  /*onClickOpenGallery(){
     this.imagePicker.getPictures(this.optionsGallery).then(async (imageData) => {
       const loading = await this.loadingController.create({
         message: 'Please wait...',
@@ -73,9 +73,8 @@ export class GaleryComponent implements OnInit {
             this.modalController.dismiss(this.imageUrl);
            })
          })).subscribe();
-  
       }, (err) => { alert(err) });
-  }
+  }*/
 
   onClickOpenCamera(){
     this.camera.getPicture(this.optionsCamera).then(async (imageData) => {

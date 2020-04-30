@@ -2,12 +2,10 @@
   <ion-toolbar>
     <ion-title>Mostrar Alumnos</ion-title>
     <ion-buttons slot="start">
-      <ion-button (click)="onClickClose()">Log out</ion-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-icon id="filter" name="funnel" (click)="onClickFilter()"></ion-icon>
-      <ion-icon></ion-icon>
-      <ion-icon id="fav" name="star" (click)="onClickFavPage()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -23,10 +21,16 @@
     </ion-item>
 
     <ion-item-options side="end" class="centrar">
-      <ion-item-option expandable (click)="onClickFavorito(alumno.userInfo)">
-        <ion-icon name="star" slot="end"></ion-icon>
-        Favorito
+      <ion-item-option expandable (click)="onClickEditarAlumno(alumno.userInfo)">
+        <ion-icon name="create" slot="end"></ion-icon>
+        Editar
       </ion-item-option>
+
+      <ion-item-option color="danger" expandable  (click)="onClickBorrarAlumno(alumno.userInfo)">
+        <ion-icon name="trash" slot="end"></ion-icon>
+          Borrar
+      </ion-item-option>
+        
     </ion-item-options>
   </ion-item-sliding>
 

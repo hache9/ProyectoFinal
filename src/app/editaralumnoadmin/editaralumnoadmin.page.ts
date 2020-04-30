@@ -5,12 +5,11 @@ import { ToastService } from '../services/toast.service';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-editaralumno',
-  templateUrl: './editaralumno.page.html',
-  styleUrls: ['./editaralumno.page.scss'],
+  selector: 'app-editaralumnoadmin',
+  templateUrl: './editaralumnoadmin.page.html',
+  styleUrls: ['./editaralumnoadmin.page.scss'],
 })
-export class EditaralumnoPage implements OnInit {
-
+export class EditaralumnoadminPage implements OnInit {
   tipopass:string="password";
 
   alumno:UserAlumno;
@@ -34,7 +33,7 @@ export class EditaralumnoPage implements OnInit {
     private toastService:ToastService,
     private userService:UserService) {
     this.routeParams.params.subscribe(params =>{
-      this.alumno=JSON.parse(params['userAlumno']);
+      this.alumno=JSON.parse(params['alumno']);
       console.log(this.alumno);
       this.alumnoImagen=this.alumno.imagen;
       this.textNombre=this.alumno.nombreyapellidos;
@@ -93,7 +92,8 @@ export class EditaralumnoPage implements OnInit {
         this.toastService.presentToast("Usuario editado correctamente");
         //this.user="";
         //this.pass="";
-        this.router.navigate(['principalalumno', {userAlumno: JSON.stringify(this.userEdited)}]);
+        //this.router.navigate(['mostraralumnosadmin', {userAlumno: JSON.stringify(this.userEdited)}]);
+        this.router.navigateByUrl("mostraralumnosadmin");
       }, error => {
         console.log(error);
         //Toast generado en servicio

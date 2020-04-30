@@ -35,6 +35,26 @@ const routes: Routes = [
     path: 'favoritos',
     loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
   },
+  {
+    path: 'principaladmin',
+    loadChildren: () => import('./principaladmin/principaladmin.module').then( m => m.PrincipaladminPageModule)
+  },
+  {
+    path: 'mostraralumnosadmin',
+    loadChildren: () => import('./mostraralumnosadmin/mostraralumnosadmin.module').then( m => m.MostraralumnosadminPageModule)
+  },
+  {
+    path: 'principalalumno',
+    loadChildren: () => import('./principalalumno/principalalumno.module').then( m => m.PrincipalalumnoPageModule)
+  },
+  {
+    path: 'editaralumnoadmin',
+    loadChildren: () => import('./editaralumnoadmin/editaralumnoadmin.module').then( m => m.EditaralumnoadminPageModule)
+  },
+  {
+    path: 'mostrarempresasadmin',
+    loadChildren: () => import('./mostrarempresasadmin/mostrarempresasadmin.module').then( m => m.MostrarempresasadminPageModule)
+  },
 
 ];
 

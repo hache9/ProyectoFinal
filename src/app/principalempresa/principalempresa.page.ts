@@ -31,7 +31,7 @@ export class PrincipalempresaPage implements OnInit {
     )
   }
 
-  showAlumno(userAlumno:UserAlumno){
+  mostrarAlumno(userAlumno:UserAlumno){
     console.log(userAlumno);
     this.router.navigate(['mostraralumno', {userAlumno: JSON.stringify(userAlumno)}]);
   }
