@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { ModalController, AlertController } from '@ionic/angular';
 import { ToastService } from '../services/toast.service';
-import { User } from '../models/user.interface';
+import { UserEmpresa } from '../models/userEmpresa.interface';
 
 @Component({
   selector: 'app-mostrarempresasadmin',
@@ -22,15 +22,19 @@ export class MostrarempresasadminPage implements OnInit {
     private toastService:ToastService) { }
 
   ngOnInit() {
-    let alumnoCollection:AngularFirestoreCollection=this.db.collection<User>('empresa');
+    let alumnoCollection:AngularFirestoreCollection=this.db.collection<UserEmpresa>('empresa');
       alumnoCollection.valueChanges().subscribe(
         res=>{
             this.empresasLista=res;
         }
       )
   }
+  mostrarEmpresa(empresa:UserEmpresa){
+    console.log(empresa);
+    this.router.navigate(['mostrarempresa', {userEmpresa: JSON.stringify(empresa)}]);
+  }
 
-  async onClickBorrarEmpresa(empresa:User){
+  async onClickBorrarEmpresa(empresa:UserEmpresa){
     const del = await this.alertController.create({
       header: 'Confirm to delete Restaurant',
       buttons: [

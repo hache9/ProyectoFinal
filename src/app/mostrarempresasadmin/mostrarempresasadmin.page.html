@@ -9,9 +9,11 @@
 
 <ion-content>
   <ion-item-sliding *ngFor="let empresa of empresasLista">  
-    <ion-item>             
+    <ion-item (click)="mostrarEmpresa(empresa.userInfo)">             
         <ion-label>
-          <h1>{{empresa.userInfo.mail}}</h1>
+          <h1>{{empresa.userInfo.nombre}} || CIF:{{empresa.userInfo.cif}}</h1>
+          <h2>E-mail: {{empresa.userInfo.mail}}</h2>
+          <h3>Localidad: {{empresa.userInfo.localidad}}</h3>
         </ion-label>
     </ion-item>
 

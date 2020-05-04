@@ -33,19 +33,28 @@ export class MostraralumnosadminPage implements OnInit {
         }
       )
     }
+    /*ionViewWillEnter(){
+      let alumnoCollection:AngularFirestoreCollection=this.db.collection<User>('alumno');
+      alumnoCollection.valueChanges().subscribe(
+        res=>{
+            this.alumnosLista=res;
+        }
+      )
+    }*/
 
     mostrarAlumno(userAlumno:UserAlumno){
       console.log(userAlumno);
       this.router.navigate(['mostraralumno', {userAlumno: JSON.stringify(userAlumno)}]);
     }
 
-    onClickEditarAlumno(alumno:UserAlumno){
+    async onClickEditarAlumno(alumno:UserAlumno){
       console.log(alumno);
       this.router.navigate(['editaralumnoadmin', {alumno: JSON.stringify(alumno)}]);
     }
+
     async onClickBorrarAlumno(alumno:UserAlumno){
       const del = await this.alertController.create({
-        header: 'Confirm to delete Restaurant',
+        header: 'Confirma para eliminar alumno',
         buttons: [
           {
             text: 'Cancel',

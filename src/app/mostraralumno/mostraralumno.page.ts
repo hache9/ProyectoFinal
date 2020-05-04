@@ -16,7 +16,10 @@ export class MostraralumnoPage implements OnInit {
   alumnoNombre:string;
   alumnoEdad:string;
   alumnoCurso:string;
+  alumnoFormacion:string;
+  alumnoExperiencia:string;
   alumnoIdiomas:string;
+  alumnoNivel:string;
   alumnoDatos:string;
 
 
@@ -30,9 +33,11 @@ export class MostraralumnoPage implements OnInit {
       this.alumnoNombre=this.userAlumno.nombreyapellidos;
       this.alumnoEdad=this.userAlumno.edad;
       this.alumnoCurso=this.userAlumno.curso;
+      this.alumnoFormacion=this.userAlumno.formacion;
+      this.alumnoExperiencia=this.userAlumno.tiempoexp;
       this.alumnoIdiomas=this.userAlumno.idiomas;
+      this.alumnoNivel=this.userAlumno.nivel;
       this.alumnoDatos=this.userAlumno.datos;
-      
     })
    }
 

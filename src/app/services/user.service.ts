@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { User } from '../models/user.interface';
 import { UserAlumno } from '../models/userAlumno.interface';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -65,65 +66,59 @@ export class UserService {
     )
   }
 
-  async editUserAlumno(id:string, userInfo:UserAlumno ){
-    var usermail=sessionStorage.getItem('user');
-    var userAlumnoId=sessionStorage.getItem('userId');
-    console.log(usermail);
-
+  async editUserAlumno(userInfo:UserAlumno ){
     //recorrer usuarios en firestone y comparar con el de sessionstorage
     let usersCollection:AngularFirestoreCollection=this.db.collection<User>('alumno');
-    usersCollection.valueChanges().subscribe(
+    console.log(usersCollection.valueChanges())
+    usersCollection.valueChanges().pipe(take(1)).subscribe(
       res=>{
         res.forEach(element=> {
-          console.log(usermail);
-          if(element.userInfo.id==id){
-            console.log(id);
+            console.log(element.userInfo)
+          if(element.userInfo.id==userInfo.id){
+            console.log(userInfo.id);
             //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
             this.db.doc("alumno/"+element.userInfo.id).update({userInfo});
           }
-          console.log("hola");
         });
       });
-      /*let empresaFav:AngularFirestoreCollection=this.db.collection<User>('empresa');
-          empresaFav.valueChanges().subscribe(
+      let empresaFav:AngularFirestoreCollection=this.db.collection<User>('empresa');
+          empresaFav.valueChanges().pipe(take(1)).subscribe(
             res=>{
               res.forEach(element=> {
                   console.log(element);
-                  this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/" + userAlumnoId).update({userInfo});
+                  this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/" + userInfo.id).update({userInfo});
                 });
             }
-          )*/
+          )
   }
 
-  /*async editarAlumnoAdmin(id:String, alumno:UserAlumno){
-      var usermail=sessionStorage.getItem('user');
-      var userAlumnoId=sessionStorage.getItem('userId');
-      console.log(usermail);
-  
-      //recorrer usuarios en firestone y comparar con el de sessionstorage
-      let usersCollection:AngularFirestoreCollection=this.db.collection<User>('alumno');
-      usersCollection.valueChanges().subscribe(
-        res=>{
-          res.forEach(element=> {
-            console.log(usermail);//admin entrando con admin
-            console.log(element.userInfo.mail);//alumnoMail entrando con admin 
-            //como admin entra aqui
-            if(element.userInfo.mail==alumno.mail){
-              console.log(id);
-                //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
-                this.db.doc("alumno/"+element.userInfo.id).update({alumno});
-                this.router.navigate(['editaralumnoadmin', {alumno: JSON.stringify(element.userInfo)}]);
-              
-          }else if(element.userInfo.mail==usermail){
-            //this.db.doc("alumno/"+element.userInfo.id).update({userInfo});
-            //this.router.navigateByUrl("mostraralumnosadmin");
+  async editarAlumnoAdmin(userInfo:UserAlumno){
+     //recorrer usuarios en firestone y comparar con el de sessionstorage
+    let usersCollection:AngularFirestoreCollection=this.db.collection<User>('alumno');
+    console.log(usersCollection.valueChanges())
+    usersCollection.valueChanges().pipe(take(1)).subscribe(
+      res=>{
+        res.forEach(element=> {
+            console.log(element.userInfo)
+          if(element.userInfo.id==userInfo.id){
+            console.log(userInfo.id);
+            //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
+            this.db.doc("alumno/"+element.userInfo.id).update({userInfo});
           }
-  
-          });
         });
-  }*/
+      });
+      let empresaFav:AngularFirestoreCollection=this.db.collection<User>('empresa');
+          empresaFav.valueChanges().pipe(take(1)).subscribe(
+            res=>{
+              res.forEach(element=> {
+                  console.log(element);
+                  this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/" + userInfo.id).update({userInfo});
+                });
+            }
+          )
+  }
 
-  borrarAlumnoAdmin(id:string, userInfo:UserAlumno){
+  async borrarAlumnoAdmin(id:string, userInfo:UserAlumno){
     //recorrer usuarios en firestone y comparar con el de sessionstorage
     let usersCollection:AngularFirestoreCollection=this.db.collection<User>('alumno');
     usersCollection.valueChanges().subscribe(
@@ -136,7 +131,7 @@ export class UserService {
         });
     });
   }
-  borrarEmpresaAdmin(id:string, empresa:User){
+  async borrarEmpresaAdmin(id:string, empresa:User){
     //recorrer usuarios en firestone y comparar con el de sessionstorage
     let usersCollection:AngularFirestoreCollection=this.db.collection<User>('empresa');
     usersCollection.valueChanges().subscribe(

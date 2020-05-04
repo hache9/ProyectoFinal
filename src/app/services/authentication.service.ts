@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserService } from './user.service';
 import { UserAlumno } from '../models/userAlumno.interface';
+import { UserEmpresa } from '../models/userEmpresa.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,20 @@ export class AuthenticationService {
     empresa:false
   }
 
+  userEmpresa:UserEmpresa={
+    id:"",
+    mail:"",
+    password:"",
+    admin:false,
+    empresa:true,
+    nombre:"",
+    cif:"",
+    calle:"",
+    cp:"",
+    localidad:"",
+    telefono:"",
+}
+
   userAlumno:UserAlumno={
     id:"",
     mail:"",
@@ -27,7 +42,11 @@ export class AuthenticationService {
     nombreyapellidos:"",
     edad:"",
     curso:"",
+    formacion:"",
+    experiencia:false,
+    tiempoexp:"",
     idiomas:"",
+    nivel:"",
     datos:"",
     admin:false,
     empresa:false,
@@ -55,15 +74,21 @@ export class AuthenticationService {
       });
   }
 
-  async createUserEmpresa(mail:string, password:string){
+  async createUserEmpresa(mail:string, password:string, nuevoNombreEmpresa:string, nuevoCif:string, nuevaCalle:string, nuevoCp:string, nuevaLocalidad:string,  nuevoTelefono:string){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
       .then((newCredential:firebase.auth.UserCredential) => {
         //para que funcione firestore
-        this.user.mail=mail;
-        this.user.password=password;
-        this.user.admin=false;
-        this.user.empresa=true;
-        this.userService.userEmpresa(this.user);
+        this.userEmpresa.mail=mail;
+        this.userEmpresa.password=password;
+        this.userEmpresa.admin=false;
+        this.userEmpresa.empresa=true;
+        this.userEmpresa.nombre=nuevoNombreEmpresa;
+        this.userEmpresa.cif=nuevoCif;
+        this.userEmpresa.calle=nuevaCalle;
+        this.userEmpresa.cp=nuevoCp;
+        this.userEmpresa.localidad=nuevaLocalidad;
+        this.userEmpresa.telefono=nuevoTelefono;
+        this.userService.userEmpresa(this.userEmpresa);
         console.log(newCredential);
       })
       .catch(error => {
@@ -72,9 +97,10 @@ export class AuthenticationService {
       });
   }
 
-  async createUserAlumno(mail:string, password:string, imagen:string, nombreyapellidos:string, edad:string, curso:string, idiomas:string, datos:string ){
+  async createUserAlumno(mail:string, password:string, imagen:string, nombreyapellidos:string, edad:string, curso:string, formacion:string, experiencia:boolean, tiempo:string, idiomas:string, nivel:string, datos:string ){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
       .then((newCredential:firebase.auth.UserCredential) => {
+        console.log(experiencia);
         //para que funcione firestore
         this.userAlumno.mail=mail;
         this.userAlumno.password=password;
@@ -82,7 +108,11 @@ export class AuthenticationService {
         this.userAlumno.imagen=imagen;
         this.userAlumno.edad=edad;
         this.userAlumno.curso=curso;
+        this.userAlumno.formacion=formacion;
+        this.userAlumno.experiencia=experiencia;
+        this.userAlumno.tiempoexp=tiempo;
         this.userAlumno.idiomas=idiomas;
+        this.userAlumno.nivel=nivel;
         this.userAlumno.datos=datos;
         this.userAlumno.admin=false;
         this.userAlumno.empresa=false;

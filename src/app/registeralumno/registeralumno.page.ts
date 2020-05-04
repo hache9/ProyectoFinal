@@ -26,13 +26,23 @@ export class RegisteralumnoPage implements OnInit {
   nuevoNombre:string="";
   nuevaEdad:string="";
   nuevoCurso:string="";
+  nuevaFormacion:string="";
+  nuevaExp:boolean=false;
+  //exp:string="";
+  nuevoTiempo:string="";
   nuevosIdiomas:string="";
   nuevosDatos:string="";
+
+
+  nivelIdioma:string="";
 
   nombreVacio:string="";
   edadVacia:string="";
   cursoVacio:string="";
+  formacionVacia:string="";
+  tiempoVacio:string="";
   idiomasVacio:string="";
+  nivelVacio:string="";
   datosVacio:string="";
 
   userAlumno:UserAlumno={
@@ -45,9 +55,22 @@ export class RegisteralumnoPage implements OnInit {
     nombreyapellidos:"",
     edad:"",
     curso:"",
+    formacion:"",
+    experiencia:false,
+    tiempoexp:"",
     idiomas:"",
+    nivel:"",
     datos:"",
 }
+
+nivel = [ 
+  {value: 'A1', name:'radioIdioma' },
+  {value: 'A2', name:'radioIdioma' },
+  {value: 'B1', name:'radioIdioma' },
+  {value: 'B2', name:'radioIdioma' },
+  {value: 'C1', name:'radioIdioma' },
+  {value: 'C2', name:'radioIdioma'}
+];
 
   constructor(private service:AuthenticationService,
     private router:Router,
@@ -56,6 +79,12 @@ export class RegisteralumnoPage implements OnInit {
     private db:AngularFirestore) { }
 
   ngOnInit() {
+    console.log(this.nuevaExp);
+  }
+
+  radioGroupChange(event) {
+    this.nivelIdioma = event.detail.value;
+    console.log(this.nivelIdioma);
   }
 
   onClickSaveRegister(){
@@ -84,32 +113,59 @@ export class RegisteralumnoPage implements OnInit {
     }else{
       this.cursoVacio="";  
     }
+    if(this.nuevaFormacion.trim()==""){
+      this.formacionVacia="Por favor, introduce formacion.";  
+    }else{
+      this.formacionVacia="";  
+    }if(this.nuevaExp=true){
+      console.log(this.nuevaExp) 
+    }else{
+      console.log("fail");  
+    }
+    if(this.nuevoTiempo.trim()==""){
+      this.tiempoVacio="Por favor introduce cuanto tiempo de experiencia tienes.";  
+      console.log("error");
+    }else{
+      this.tiempoVacio="";  
+    }
     if(this.nuevosIdiomas.trim()==""){
-      this.idiomasVacio="Por favor, introduce otros conocimientos.";  
+      this.idiomasVacio="Por favor, introduce idiomas.";  
     }else{
       this.idiomasVacio="";  
+    }
+    if(this.nivelIdioma.trim()==""){
+      this.nivelVacio="Por favor, introduce nivel de idioma.";  
+    }else{
+      this.nivelVacio="";  
     }
     if(this.nuevosDatos.trim()==""){
       this.datosVacio="Por favor, introduce datos de interes.";  
     }else{
       this.datosVacio="";  
     }
-    if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombre.trim()!="" && this.nuevaEdad!="" && this.nuevoCurso.trim()!="" && this.nuevosIdiomas.trim()!="" && this.nuevosDatos.trim()!=""){
+    if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombre.trim()!="" && this.nuevaEdad!="" && this.nuevoCurso.trim()!="" && this.nuevaFormacion.trim()!="" && this.nuevoTiempo.trim()!="" && this.nuevosIdiomas.trim()!="" /*&& this.nuevosDatos.trim()!=""*/){
       console.log(this.user);
       console.log(this.pass);
+      console.log(this.nuevaExp);
       
-        this.service.createUserAlumno(this.user, this.pass, this.nuevaImagen, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevosIdiomas, this.nuevosDatos).then(() => {
+       this.service.createUserAlumno(this.user, this.pass, this.nuevaImagen, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevaFormacion,this.nuevaExp, this.nuevoTiempo, this.nuevosIdiomas, this.nivelIdioma, this.nuevosDatos).then(() => {
           console.log("Usuario creado correctamente");
           //Toast generado en servicio
           this.toastService.presentToast("Usuario creado correctamente");
           this.user="";
           this.pass="";
+          this.nuevoNombre="";
+          this.nuevaEdad="";
+          this.nuevoCurso="";
+          this.nuevaFormacion="";
+          this.nuevosIdiomas="";
+          this.nuevosDatos="";
           this.router.navigateByUrl('/home');
         }, error => {
           console.log(error);
           //Toast generado en servicio
           this.toastService.presentToast("Error al crear el Usuario");
-          });        
+          });
       }
     }
     
