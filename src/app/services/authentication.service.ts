@@ -40,7 +40,7 @@ export class AuthenticationService {
     password:"",
     imagen:"",
     nombreyapellidos:"",
-    edad:"",
+    edad:null,
     curso:"",
     formacion:"",
     experiencia:false,
@@ -97,7 +97,7 @@ export class AuthenticationService {
       });
   }
 
-  async createUserAlumno(mail:string, password:string, imagen:string, nombreyapellidos:string, edad:string, curso:string, formacion:string, experiencia:boolean, tiempo:string, idiomas:string, nivel:string, datos:string ){
+  async createUserAlumno(mail:string, password:string, imagen:string, nombreyapellidos:string, edad:number, curso:string, formacion:string, experiencia:boolean, tiempo:string, idiomas:string, nivel:string, datos:string ){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
       .then((newCredential:firebase.auth.UserCredential) => {
         console.log(experiencia);

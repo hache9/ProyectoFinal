@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../models/user.interface';
 import { Router } from '@angular/router';
@@ -15,9 +15,14 @@ export class FilterComponent implements OnInit {
   alumnoFiltered:any;
 
   filtrarNombre:string="";
-  filtrarEdad:string="";
+  filtrarEdad:number;
   filtrarCurso:string="";
+  filtrarFormacion:string="";
   filtrarIdiomas:string="";
+  filtrarNivelIdiomas:string="";
+  filtrarDatos:string="";
+  filtrarExperiencia:boolean;
+  filtrarSinExperiencia:boolean;
 
   constructor(private db:AngularFirestore,
     private router:Router,
@@ -42,8 +47,8 @@ export class FilterComponent implements OnInit {
         return item.userInfo.nombreyapellidos.toLowerCase().includes(filtroNombre.toLowerCase());
       });    
     }
-    if(this.filtrarEdad.trim()!=""){
-      let filtroEdad = this.filtrarEdad.trim(); 
+    if(this.filtrarEdad!=null){
+      let filtroEdad = this.filtrarEdad; 
       this.alumnoFiltered = this.alumnoFiltered.filter(function(item:any){
         return item.userInfo.edad==filtroEdad;
       });    
@@ -54,12 +59,49 @@ export class FilterComponent implements OnInit {
         return item.userInfo.curso.toLowerCase().includes(filtroCurso.toLowerCase());
       });    
     }
+    if(this.filtrarFormacion.trim()!=""){
+      console.log("hola");
+      let filtroFormacion = this.filtrarFormacion.trim(); 
+      this.alumnoFiltered = this.alumnoFiltered.filter(function(item:any){
+        return item.userInfo.formacion.toLowerCase().includes(filtroFormacion.toLowerCase());
+      });    
+    }
     if(this.filtrarIdiomas.trim()!=""){
       let filtroidiomas = this.filtrarIdiomas.trim(); 
       this.alumnoFiltered = this.alumnoFiltered.filter(function(item:any){
         return item.userInfo.idiomas.toLowerCase().includes(filtroidiomas.toLowerCase());
       });    
     }
+    if(this.filtrarNivelIdiomas.trim()!=""){
+      let filtroNivelIdiomas = this.filtrarNivelIdiomas.trim(); 
+      this.alumnoFiltered = this.alumnoFiltered.filter(function(item:any){
+        if(item.userInfo.nivel==filtroNivelIdiomas){
+        return item.userInfo.nivel;
+        }
+      });    
+    }
+    if(this.filtrarDatos.trim()!=""){
+      let filtroDatos = this.filtrarDatos.trim(); 
+      this.alumnoFiltered = this.alumnoFiltered.filter(function(item:any){
+        return item.userInfo.datos.toLowerCase().includes(filtroDatos.toLowerCase());
+      });    
+    }
+    if(this.filtrarExperiencia==true){
+      let filtroExperiencia = this.filtrarExperiencia; 
+      this.alumnoFiltered = this.alumnoFiltered.filter(function(item:any){
+        return item.userInfo.experiencia==filtroExperiencia;
+      });    
+    }
+    if(this.filtrarSinExperiencia==true){
+      let filtroSinExperiencia = false; 
+      this.alumnoFiltered = this.alumnoFiltered.filter(function(item:any){
+        return item.userInfo.experiencia==filtroSinExperiencia;
+      });    
+    }
+    if(this.filtrarSinExperiencia==true && this.filtrarExperiencia==true){
+      this.modalController.dismiss(this.alumnos);
+    }
+   
 
     console.log(this.alumnoFiltered);
 

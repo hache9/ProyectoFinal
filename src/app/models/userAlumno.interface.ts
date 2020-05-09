@@ -6,7 +6,7 @@ export interface UserAlumno{
     empresa:boolean;
     imagen:string;
     nombreyapellidos:string;
-    edad:string;
+    edad:number;
     curso:string;
     formacion:string;
     experiencia:boolean;

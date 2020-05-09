@@ -37,12 +37,12 @@ export class RegisteradminPage implements OnInit {
 
   onClickSaveRegister(){
     if(this.user.trim()==""){
-      this.userfail="Please, enter name.";
+      this.userfail="Por favor, introduce un e-mail válido.";
     }else{
       this.userfail="";
     }
     if(this.pass.trim()==""){
-      this.passfail="Please, enter pass.";
+      this.passfail="Por favor, introduce una contraseña.";
     }else{
       this.passfail="";
     }
@@ -50,13 +50,13 @@ export class RegisteradminPage implements OnInit {
       console.log(this.user);
       console.log(this.pass);
       
-      if(this.checkAdmin==false && this.adminPass.trim()==""){
+      if(this.checkAdmin==true && this.adminPass.trim()==""){
         //Toast generado en servicio
-        this.toastService.presentToast("Error imposible crear usuario Admin");
+        this.toastService.presentToast("Contraseña administrador vacía.");
       }else{
         if(this.checkAdmin==true && this.adminPass==this.adminPassVerify){
           console.log(this.checkAdmin);
-          this.service.createUserAdmin(this.user, this.pass, this.checkAdmin, this.checkEmpresa).then(() => {
+          this.service.createUserAdmin(this.user.toLowerCase(), this.pass, this.checkAdmin, this.checkEmpresa).then(() => {
             console.log("Usuario Admin creado correctamente");
             //Toast generado en servicio
             this.toastService.presentToast("Usuario Administrador creado correctamente");
@@ -68,7 +68,7 @@ export class RegisteradminPage implements OnInit {
           }, error => {
             console.log(error);
             //Toast generado en servicio
-            this.toastService.presentToast("Error al crear el Usuario Administrador");
+            this.toastService.presentToast("Introduce un formato de email correcto");
           });
         }else if(this.checkAdmin==true && this.adminPass!=this.adminPassVerify){
           //Toast generado en servicio

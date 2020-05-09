@@ -12,13 +12,15 @@ export class PrincipalalumnoPage implements OnInit {
   alumnoMail:string;
   alumnoImagen:string;
   alumnoNombre:string;
-  alumnoEdad:string;
+  alumnoEdad:number;
   alumnoCurso:string;
   alumnoFormacion:string;
   alumnoExperiencia:string;
   alumnoIdiomas:string;
   alumnoNivel:string;
   alumnoDatos:string;
+
+  expBool:boolean;
 
 
   constructor(private routeParams:ActivatedRoute,
@@ -33,6 +35,7 @@ export class PrincipalalumnoPage implements OnInit {
       this.alumnoEdad=this.userAlumno.edad;
       this.alumnoCurso=this.userAlumno.curso;
       this.alumnoFormacion=this.userAlumno.formacion;
+      this.expBool=this.userAlumno.experiencia;
       this.alumnoExperiencia=this.userAlumno.tiempoexp;
       this.alumnoIdiomas=this.userAlumno.idiomas;
       this.alumnoNivel=this.userAlumno.nivel;

@@ -12,24 +12,25 @@
   </ion-item>
   
   <ion-item>
-    <ion-label position="stacked">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+    <!-- <ion-label position="stacked">E-Mail <ion-text color="danger">*</ion-text></ion-label> -->
     <ion-input type="text" type="email" placeholder="EMAIL" [(ngModel)]="user"></ion-input>
   </ion-item>
   <p class="red">{{userfail}}</p>
 
   <ion-item>
-    <ion-label position="stacked">Password <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input type="text"  type="password" placeholder="PASSWORD" [(ngModel)]="pass"></ion-input>
+    <!-- <ion-label position="stacked">Contraseña <ion-text color="danger">*</ion-text></ion-label> -->
+    <ion-input type="{{tipopass}}" placeholder="Contraseña" [(ngModel)]="pass"></ion-input>
+    <ion-icon id="ojo" name="eye" (click)="onClickEye()"></ion-icon>
   </ion-item>
   <p class="red">{{passfail}}</p>
 
   <ion-item>
-    <ion-button id="login" type="submit" class="ion-no-margin" (click)="onClickLogin()">Login</ion-button>
+    <ion-button id="login" type="submit" class="ion-no-margin" (click)="onClickLogin()">Acceder</ion-button>
   </ion-item>
 
   <ion-item>
-    <p id="register" (click)="goRegister()">Sign up</p>
-    <a id="forget" (click)="onClickForgot()">{{forgot}}</a>
+    <p id="register" (click)="goRegister()">Registrarse</p>
+    <a id="forget" (click)="onClickForgot()">Olvidé la Contraseña</a>
   </ion-item>
 
 </ion-content>

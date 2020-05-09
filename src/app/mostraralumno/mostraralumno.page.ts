@@ -1,6 +1,8 @@
 import { UserAlumno } from './../models/userAlumno.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+
 
 
 @Component({
@@ -14,7 +16,7 @@ export class MostraralumnoPage implements OnInit {
   alumnoMail:string;
   alumnoImagen:string;
   alumnoNombre:string;
-  alumnoEdad:string;
+  alumnoEdad:number;
   alumnoCurso:string;
   alumnoFormacion:string;
   alumnoExperiencia:string;
@@ -22,8 +24,11 @@ export class MostraralumnoPage implements OnInit {
   alumnoNivel:string;
   alumnoDatos:string;
 
+  expBool:boolean;
 
-  constructor(private routeParams:ActivatedRoute) {
+
+  constructor(private routeParams:ActivatedRoute,
+    private EmailComposer:EmailComposer) {
     this.routeParams.params.subscribe(params =>{
       this.userAlumno=JSON.parse(params['userAlumno']);
       console.log(this.userAlumno);
@@ -34,6 +39,7 @@ export class MostraralumnoPage implements OnInit {
       this.alumnoEdad=this.userAlumno.edad;
       this.alumnoCurso=this.userAlumno.curso;
       this.alumnoFormacion=this.userAlumno.formacion;
+      this.expBool=this.userAlumno.experiencia;
       this.alumnoExperiencia=this.userAlumno.tiempoexp;
       this.alumnoIdiomas=this.userAlumno.idiomas;
       this.alumnoNivel=this.userAlumno.nivel;
@@ -42,6 +48,13 @@ export class MostraralumnoPage implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+  onClickEmail(){
+    console.log(this.EmailComposer);
+    this.EmailComposer.open({
+      to: this.alumnoMail,
+    })
   }
 
 }

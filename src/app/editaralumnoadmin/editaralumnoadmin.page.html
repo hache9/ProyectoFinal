@@ -30,7 +30,7 @@
   <p class="red">{{edadVacia}}</p>
 
   <ion-item>
-    <ion-label position="fixed">Curso:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Curso:<ion-text color="danger">*</ion-text></ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="textCurso"></ion-input>
@@ -38,7 +38,7 @@
   <p class="red">{{cursoVacio}}</p>
 
   <ion-item>
-    <ion-label position="fixed">Formación:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Formación académica:<ion-text color="danger">*</ion-text></ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="textFormacion"></ion-input>
@@ -51,7 +51,10 @@
   </ion-item>
 
   <ion-item *ngIf="expBool">
-    <ion-label>Tiempo:</ion-label>
+    <ion-label>Tiempo de experiencia laboral:<ion-text color="danger">*</ion-text></ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="expBool">
     <ion-input required type="text" [(ngModel)]="textTiempo"></ion-input>
   </ion-item>
   <p class="red">{{tiempoVacio}}</p>
@@ -64,7 +67,16 @@
   </ion-item>
   <p class="red">{{idiomasVacio}}</p>
 
-  <ion-list>
+  <ion-item>
+    <ion-label>Nivel Actual: {{nivelActual}}</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Cambiar nivel de idioma</ion-label>
+    <ion-checkbox slot="start" color="success" (click)="cambiarNivelIdioma()" [(ngModel)]="nivelBool"></ion-checkbox>
+  </ion-item>
+
+  <ion-list *ngIf="nivelBool">
     <ion-radio-group  allow-empty-selection = "true"
     name="radio-group"
     (ionChange)="radioGroupChange($event)">
@@ -88,6 +100,6 @@
   </ion-item>
   <p class="red">{{datosVacio}}</p>
 
-  <ion-button expand="block" (click)="onClickEditAlumno()">Registrar Alumno</ion-button>
+  <ion-button expand="block" (click)="onClickEditAlumno()">Editar Alumno</ion-button>
 
 </ion-content>

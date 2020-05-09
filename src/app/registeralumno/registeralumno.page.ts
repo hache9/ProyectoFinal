@@ -24,10 +24,10 @@ export class RegisteralumnoPage implements OnInit {
 
   nuevaImagen:string="../../assets/img/noimage.png";
   nuevoNombre:string="";
-  nuevaEdad:string="";
+  nuevaEdad:number=null;
   nuevoCurso:string="";
   nuevaFormacion:string="";
-  nuevaExp:boolean=false;
+  nuevaExperiencia:boolean=false;
   //exp:string="";
   nuevoTiempo:string="";
   nuevosIdiomas:string="";
@@ -53,7 +53,7 @@ export class RegisteralumnoPage implements OnInit {
     empresa:false,
     imagen:"",
     nombreyapellidos:"",
-    edad:"",
+    edad:null,
     curso:"",
     formacion:"",
     experiencia:false,
@@ -79,7 +79,7 @@ nivel = [
     private db:AngularFirestore) { }
 
   ngOnInit() {
-    console.log(this.nuevaExp);
+    console.log(this.nuevaExperiencia);
   }
 
   radioGroupChange(event) {
@@ -88,6 +88,7 @@ nivel = [
   }
 
   onClickSaveRegister(){
+    console.log(this.nuevaEdad);
     if(this.user.trim()==""){
       this.userfail="Por favor, introduce email.";
     }else{
@@ -103,30 +104,41 @@ nivel = [
     }else{
       this.nombreVacio="";  
     }
-    if(this.nuevaEdad==""){
+    if(this.nuevaEdad==null){
       this.edadVacia="Por favor, introduce edad.";  
     }else{
-      this.edadVacia="";  
-    }
+      this.edadVacia="";
+      if(this.nuevaEdad<14 || this.nuevaEdad>99){
+        this.edadVacia="Por favor, introduce edad válida entre 14 y 99 años."; 
+      }else{
+        this.edadVacia=""; 
+      }
+    }    
     if(this.nuevoCurso.trim()==""){
       this.cursoVacio="Por favor, introduce curso.";  
     }else{
-      this.cursoVacio="";  
+      if(this.nuevoCurso.trim()!="DAW" || this.nuevoCurso.trim()!="SMR" || this.nuevoCurso.trim()!="GA" || this.nuevoCurso.trim()!="FPB"){
+      this.cursoVacio="Por favor, introduce curso válido (DAW, SMR, GA. FPB).";  
+      }else if(this.nuevoCurso.trim()=="DAW" || this.nuevoCurso.trim()=="SMR" || this.nuevoCurso.trim()=="GA" || this.nuevoCurso.trim()=="FPB"){
+        this.cursoVacio="";
+      }
     }
     if(this.nuevaFormacion.trim()==""){
       this.formacionVacia="Por favor, introduce formacion.";  
     }else{
       this.formacionVacia="";  
-    }if(this.nuevaExp=true){
-      console.log(this.nuevaExp) 
-    }else{
-      console.log("fail");  
     }
-    if(this.nuevoTiempo.trim()==""){
-      this.tiempoVacio="Por favor introduce cuanto tiempo de experiencia tienes.";  
-      console.log("error");
-    }else{
-      this.tiempoVacio="";  
+    if(this.nuevaExperiencia==true){
+      if(this.nuevoTiempo.trim()==""){
+        this.tiempoVacio="Por favor, introduce tiempo de experiencia.";
+      }else{
+        this.tiempoVacio="";
+      }
+    }
+    if(this.nuevaExperiencia==false){
+      this.tiempoVacio="Por favor, introduce tiempo de experiencia.";
+      this.tiempoVacio="";
+      this.nuevoTiempo="";
     }
     if(this.nuevosIdiomas.trim()==""){
       this.idiomasVacio="Por favor, introduce idiomas.";  
@@ -143,20 +155,21 @@ nivel = [
     }else{
       this.datosVacio="";  
     }
-    if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombre.trim()!="" && this.nuevaEdad!="" && this.nuevoCurso.trim()!="" && this.nuevaFormacion.trim()!="" && this.nuevoTiempo.trim()!="" && this.nuevosIdiomas.trim()!="" /*&& this.nuevosDatos.trim()!=""*/){
+    if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombre.trim()!="" && this.nuevaEdad!=null && this.nuevoCurso.trim()!="" && this.nuevaFormacion.trim()!="" && this.nuevoTiempo.trim()!="" && this.nuevosIdiomas.trim()!="" && this.nuevosDatos.trim()!=""){
       console.log(this.user);
       console.log(this.pass);
-      console.log(this.nuevaExp);
+      console.log(this.nuevaExperiencia);
       
-       this.service.createUserAlumno(this.user, this.pass, this.nuevaImagen, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevaFormacion,this.nuevaExp, this.nuevoTiempo, this.nuevosIdiomas, this.nivelIdioma, this.nuevosDatos).then(() => {
+       this.service.createUserAlumno(this.user.toLowerCase(), this.pass, this.nuevaImagen, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevaFormacion,this.nuevaExperiencia, this.nuevoTiempo, this.nuevosIdiomas, this.nivelIdioma, this.nuevosDatos).then(() => {
           console.log("Usuario creado correctamente");
           //Toast generado en servicio
           this.toastService.presentToast("Usuario creado correctamente");
           this.user="";
           this.pass="";
           this.nuevoNombre="";
-          this.nuevaEdad="";
+          this.nuevaEdad=null;
           this.nuevoCurso="";
+          this.nuevaExperiencia=false;
           this.nuevaFormacion="";
           this.nuevosIdiomas="";
           this.nuevosDatos="";
@@ -191,7 +204,6 @@ nivel = [
       await modal.present();
       const data=await modal.onDidDismiss();
       this.nuevaImagen=data.data;
-      this.toastService.presentToast(this.nuevaImagen);
   }
 
 }

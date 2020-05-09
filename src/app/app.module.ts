@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterComponent } from './filter/filter.component';
 import { FavfilterComponent } from './favfilter/favfilter.component';
 import { FilteralumnosadminComponent } from './filteralumnosadmin/filteralumnosadmin.component';
-
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 @NgModule({
   declarations: [AppComponent, GaleryComponent, FilterComponent, FavfilterComponent, FilteralumnosadminComponent],
@@ -50,7 +50,8 @@ import { FilteralumnosadminComponent } from './filteralumnosadmin/filteralumnosa
     FilterComponent,
     FavfilterComponent,
     FilteralumnosadminComponent,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    EmailComposer
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,5 @@
+import { UserEmpresa } from './../models/userEmpresa.interface';
+import { UserAlumno } from './../models/userAlumno.interface';
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
@@ -5,6 +7,7 @@ import {AngularFirestoreCollection,AngularFirestore} from '@angular/fire/firesto
 import {User} from '../models/user.interface';
 import { AlertController } from '@ionic/angular';
 import { ToastService } from '../services/toast.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +20,7 @@ export class HomePage {
   pass: string = "";
   userfail: string = "";
   passfail: string = "";
-  forgot: string = "Forgot Pass"
+  tipopass:string="password";
 
   constructor(private router: Router,
     private authservice: AuthenticationService,
@@ -33,12 +36,12 @@ export class HomePage {
   async onClickLogin() {
     console.log(this.user);
     if (this.user.trim() == "") {
-      this.userfail = "Please, enter name.";
+      this.userfail = "Por favor, introduce e-mail.";
     } else {
       this.userfail = "";
     }
     if (this.pass.trim() == "") {
-      this.passfail = "Please, enter pass.";
+      this.passfail = "Por favor, introduce contraseña.";
     } else {
       this.passfail = "";
     }
@@ -56,7 +59,7 @@ export class HomePage {
         var usermail = sessionStorage.getItem('user');
         //recorrer usuarios de firestone para los administradores
         let usersCollectionAdmin: AngularFirestoreCollection = this.db.collection < User > ('admin');
-        usersCollectionAdmin.valueChanges().subscribe(
+        usersCollectionAdmin.valueChanges().pipe(take(1)).subscribe(
           res => {
             res.forEach(element => {
               //admin
@@ -70,8 +73,8 @@ export class HomePage {
             });
           });
         //recorrer usuarios de firestone para las empresas
-        let usersCollectionEmpresa: AngularFirestoreCollection = this.db.collection < User > ('empresa');
-        usersCollectionEmpresa.valueChanges().subscribe(
+        let usersCollectionEmpresa: AngularFirestoreCollection = this.db.collection < UserEmpresa > ('empresa');
+        usersCollectionEmpresa.valueChanges().pipe(take(1)).subscribe(
           res => {
             res.forEach(element => {
               //empresa
@@ -86,8 +89,8 @@ export class HomePage {
           });
 
           //recorrer usuarios de firestone para los alumnos
-        let usersCollectionAlumno: AngularFirestoreCollection = this.db.collection < User > ('alumno');
-        usersCollectionAlumno.valueChanges().subscribe(
+        let usersCollectionAlumno: AngularFirestoreCollection = this.db.collection < UserAlumno > ('alumno');
+        usersCollectionAlumno.valueChanges().pipe(take(1)).subscribe(
           res => {
             res.forEach(element => {
               //alumno
@@ -120,7 +123,7 @@ export class HomePage {
   //Restablecer Contraseña
   async onClickForgot(){
     const alert = await this.alertController.create({
-      header: 'Please, write your E-Mail',
+      header: 'Por favor, escribe tu E-Mail',
       inputs: [
         {
           name: 'email',
@@ -131,7 +134,7 @@ export class HomePage {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
@@ -139,7 +142,7 @@ export class HomePage {
           }
         }, 
         {
-          text: 'Accept',
+          text: 'Aceptar',
           handler: (alertData) => {
             console.log(alertData.email);
             //Forgot user
@@ -156,5 +159,13 @@ export class HomePage {
     ]
    });
    await alert.present();
+  }
+
+  onClickEye(){
+    if(this.tipopass=="password"){
+        this.tipopass="text";
+    }else{
+        this.tipopass="password"
+    }
   }
 }

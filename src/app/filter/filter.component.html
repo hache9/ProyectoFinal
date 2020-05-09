@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Filter</ion-title>
+    <ion-title>Filtro</ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="onClickClose()">X</ion-button>
     </ion-buttons>
@@ -9,26 +9,55 @@
 
 <ion-content>
   <ion-item>
-    <p>Para limpiar el filtro pulsa el boton con los campos vacíos.</p>
+    <h3><b>Para limpiar el filtro pulsa el boton con los campos vacíos.</b></h3>
   </ion-item>
 
   <ion-item>
-    <ion-searchbar placeholder="Busca por nombre:" [(ngModel)]="filtrarNombre"></ion-searchbar>
+    <ion-label><b>Nombre:</b></ion-label>
+    <ion-input placeholder="Nombre." [(ngModel)]="filtrarNombre"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-searchbar placeholder="Busca por edad:" [(ngModel)]="filtrarEdad"></ion-searchbar>
+    <ion-label><b>Edad:</b></ion-label>
+    <ion-input type="number" placeholder="Edad." [(ngModel)]="filtrarEdad"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-searchbar placeholder="Busca por curso:" [(ngModel)]="filtrarCurso"></ion-searchbar>
+    <ion-label><b>Curso:</b></ion-label>
+    <ion-input placeholder="Curso." [(ngModel)]="filtrarCurso"></ion-input>
+  </ion-item>
+
+  <ion-item><ion-label><b>Formación: Grado medio, superior, graduado...</b></ion-label></ion-item>
+  <ion-item>
+    <ion-input placeholder="Formación." [(ngModel)]="filtrarFormacion"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label><b>Idiomas:</b></ion-label>
+    <ion-input placeholder="Idiomas:" [(ngModel)]="filtrarIdiomas"></ion-input>
+  </ion-item>
+
+  <ion-item><ion-label><b>Nivel de Idiomas: A2, B1, C2...</b></ion-label></ion-item>
+  <ion-item>
+    <ion-input placeholder="Nivel de Idiomas." [(ngModel)]="filtrarNivelIdiomas"></ion-input>
+  </ion-item>
+
+  <ion-item><ion-label><b>Datos de interés: carnet, vehiculo, disponibilidad...</b></ion-label></ion-item>
+  <ion-item>
+    <ion-input placeholder="Datos de interés:" [(ngModel)]="filtrarDatos"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-searchbar placeholder="Busca por idiomas:" [(ngModel)]="filtrarIdiomas"></ion-searchbar>
+    <ion-label>Experiencia laboral</ion-label>
+    <ion-checkbox slot="start" color="success" [(ngModel)]="filtrarExperiencia"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-label>Sin experiencia laboral</ion-label>
+    <ion-checkbox slot="start" color="success" [(ngModel)]="filtrarSinExperiencia"></ion-checkbox>
   </ion-item>
 
+
   <ion-item>
-    <ion-button id="filter" (click)="onClickFilterAccept()">Filter</ion-button>
+    <ion-button id="filter" (click)="onClickFilterAccept()">Filtrar</ion-button>
   </ion-item>
 </ion-content>

@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../services/toast.service';
 import { UserService } from '../services/user.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ModalController } from '@ionic/angular';
+import { GaleryComponent } from '../galery/galery.component';
+
 
 @Component({
   selector: 'app-editaralumno',
@@ -18,13 +22,15 @@ export class EditaralumnoPage implements OnInit {
   
   alumnoImagen:string;
   textNombre:string;
-  textEdad:string;
+  textEdad:number;
   textCurso:string;
   textFormacion:string;
   expBool:boolean;
   exp:string;
   textTiempo:string;
   textIdiomas:string;
+  nivelBool:boolean;
+  nivelActual:string;
   textNivel:string;
   textDatos:string;
   isChecked:boolean=false;
@@ -35,9 +41,27 @@ export class EditaralumnoPage implements OnInit {
   idiomasVacio:string="";
   nivelVacio:string="";
   datosVacio:string="";
-  nivelIdioma:string="";
   formacionVacia:string="";
   tiempoVacio:string="";
+
+  userAlumno:UserAlumno={
+    id:"",
+    mail:"",
+    password:"",
+    admin:false,
+    empresa:false,
+    imagen:"",
+    nombreyapellidos:"",
+    edad:null,
+    curso:"",
+    formacion:"",
+    experiencia:false,
+    tiempoexp:"",
+    idiomas:"",
+    nivel:"",
+    datos:"",
+}
+
 
   
 nivel = [ 
@@ -54,7 +78,9 @@ nivel = [
   constructor(private routeParams:ActivatedRoute,
     private router:Router,
     private toastService:ToastService,
-    private userService:UserService) {
+    private userService:UserService,
+    private db:AngularFirestore,
+    private modalController:ModalController) {
     this.routeParams.params.subscribe(params =>{
       this.alumno=JSON.parse(params['userAlumno']);
       console.log(this.alumno);
@@ -66,6 +92,7 @@ nivel = [
       this.textTiempo=this.alumno.tiempoexp;
       this.textIdiomas=this.alumno.idiomas;
       this.textNivel=this.alumno.nivel;
+      this.nivelActual=this.alumno.nivel;
       this.textFormacion=this.alumno.formacion;
       this.textDatos=this.alumno.datos;
     });
@@ -100,13 +127,17 @@ nivel = [
     console.log(this.textNivel);
   }
 
+  cambiarNivelIdioma(){
+    this.textNivel="";
+  }
+
   onClickEditAlumno(){
     if(this.textNombre.trim()==""){
       this.nombreVacio="Por favor, introduce nombre y apellidos.";  
     }else{
       this.nombreVacio="";  
     }
-    if(this.textEdad==""){
+    if(this.textEdad==null){
       this.edadVacia="Por favor, introduce edad.";  
     }else{
       this.edadVacia="";  
@@ -121,28 +152,48 @@ nivel = [
     }else{
       this.formacionVacia="";  
     }
-    if(this.textTiempo.trim()==""){
-      this.tiempoVacio="Por favor introduce cuanto tiempo de experiencia tienes.";  
-      console.log("error");
-    }else{
-      this.tiempoVacio="";  
+    if(this.expBool==true){
+      if(this.textTiempo.trim()==""){
+        this.tiempoVacio="Por favor, introduce tiempo de experiencia.";
+      }else{
+        this.tiempoVacio="";
+      }
     }
+    if(this.expBool==false){
+      this.tiempoVacio="";
+      this.textTiempo="";
+    }
+    // if(this.nuevaExperiencia==false){
+    //   this.tiempoVacio="Por favor, introduce tiempo de experiencia.";
+    //   this.tiempoVacio="";
+    // }
     if(this.textIdiomas.trim()==""){
       this.idiomasVacio="Por favor, introduce idiomas.";  
     }else{
       this.idiomasVacio="";  
     }
-    if(this.nivelIdioma.trim()==""){
+    if(this.nivelBool==true){
+      if(this.textNivel.trim()==""){
+        this.nivelVacio="Por favor, introduce nivel de idioma.";
+      }else{
+        this.nivelVacio="";
+      }
+    }
+    if(this.nivelBool==false){
+      this.nivelVacio="";
+      this.textNivel=this.alumno.nivel;
+    }
+    /*if(this.textNivel.trim()==""){
       this.nivelVacio="Por favor, introduce nivel de idioma.";  
     }else{
       this.nivelVacio="";  
-    }
+    }*/
     if(this.textDatos.trim()==""){
       this.datosVacio="Por favor, introduce datos de interes.";  
     }else{
       this.datosVacio="";  
     }
-    if(this.textNombre.trim()!="" && this.textEdad!="" && this.textCurso.trim()!="" && this.textIdiomas.trim()!="" && this.textDatos.trim()!=""){
+    if(this.textNombre.trim()!="" && this.textEdad!=null && this.textCurso.trim()!="" && this.textFormacion.trim()!="" && this.textIdiomas.trim()!="" && this.textNivel.trim()!="" && this.textDatos.trim()!=""){
       this.userEdited={
         id:this.alumno.id,
         mail:this.alumno.mail,
@@ -183,5 +234,20 @@ nivel = [
     }else{
         this.tipopass="password"
     }
+  }
+
+  async onClickSelectImage(){
+    this.userAlumno.id=this.db.createId();
+    console.log("Seleccionar imagen");
+    const modal = await this.modalController.create({
+      component: GaleryComponent,
+      cssClass: "gallery-modal",
+      componentProps:{
+        'alumno': JSON.stringify(this.userAlumno)
+      }
+    });
+      await modal.present();
+      const data=await modal.onDidDismiss();
+      this.alumnoImagen=data.data;
   }
 }

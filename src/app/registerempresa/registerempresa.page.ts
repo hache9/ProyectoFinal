@@ -31,10 +31,13 @@ export class RegisterempresaPage implements OnInit {
 
   nombreVacio:string="";
   cifVacio:string="";
+  cifInvalido:string="";
   calleVacia:string="";
   cpVacio:string="";
+  cpInvalido:string="";
   localidadVacia:string="";
   telefonoVacio:string="";
+  telfInvalido:string="";
   
 
   userEmpresa:UserEmpresa={
@@ -81,7 +84,13 @@ export class RegisterempresaPage implements OnInit {
     if(this.nuevoCif.trim()==""){
       this.cifVacio="Por favor, introduce cif.";  
     }else{
-      this.cifVacio="";  
+      this.cifVacio="";
+      if(this.nuevoCif.length!=9){
+        this.cifInvalido="Por favor introduce 9 carácteres válidos";  
+      }else if(this.nuevoCif.length==9){
+        console.log(this.nuevoCif.length);
+        this.cifInvalido="";
+      } 
     }
     if(this.nuevaCalle.trim()==""){
       this.calleVacia="Por favor, introduce calle.";  
@@ -91,30 +100,42 @@ export class RegisterempresaPage implements OnInit {
     if(this.nuevoCp==""){
       this.cpVacio="Por favor, introduce código póstal.";  
     }else{
-      this.cpVacio="";  
+      this.cpVacio="";
+      if(this.nuevoCp.toString().length!=5){
+        this.cpInvalido="Por favor introduce 5 carácteres numéricos";  
+      }else if(this.nuevoCp.toString().length==5){
+        console.log(this.nuevoCp.toString().length);
+        this.cpInvalido="";
+      }
     }
     if(this.nuevaLocalidad.trim()==""){
       this.localidadVacia="Por favor, introduce localidad.";  
     }else{
       this.localidadVacia="";  
     }
-    if(this.nuevoTelefono.trim()==""){
-      this.telefonoVacio="Por favor, introduce datos de telefono.";  
+    if(this.nuevoTelefono==""){
+      this.telefonoVacio="Por favor, introduce numero de telefono.";  
     }else{
-      this.telefonoVacio="";  
+      this.telefonoVacio="";
+      if(this.nuevoTelefono.toString().length!=9){
+        this.telfInvalido="Por favor introduce 9 carácteres numéricos";  
+      }else if(this.nuevoTelefono.toString().length==9){
+        console.log(this.nuevoTelefono.toString().length);
+        this.telfInvalido="";
+      }
     }
     if(this.user.trim()!="" && this.pass.trim()!=""){
       console.log(this.user);
       console.log(this.pass);
-      if(this.checkEmpresa==false && this.empresaPass.trim()==""){
+      if(this.checkEmpresa==true && this.empresaPass.trim()==""){
         //Toast generado en servicio
-        this.toastService.presentToast("Error imposible crear usuario Empresa");
+        this.toastService.presentToast("Contraseña empresa vacía.");
       }else{
 
         if(this.checkEmpresa==true && this.empresaPass==this.empresaPassVerify){
           console.log(this.checkEmpresa);
           console.log(this.checkAdmin);
-          this.service.createUserEmpresa(this.user, this.pass, this.nuevoNombreEmpresa, this.nuevoCif, this.nuevaCalle, this.nuevoCp, this.nuevaLocalidad, this.nuevoTelefono).then(() => {
+          this.service.createUserEmpresa(this.user.toLowerCase(), this.pass, this.nuevoNombreEmpresa, this.nuevoCif, this.nuevaCalle, this.nuevoCp, this.nuevaLocalidad, this.nuevoTelefono).then(() => {
             console.log("Usuario Empresa creado correctamente");
             //Toast generado en servicio
             this.toastService.presentToast("Usuario Empresa creado correctamente");
@@ -126,7 +147,7 @@ export class RegisterempresaPage implements OnInit {
           }, error => {
             console.log(error);
             //Toast generado en servicio
-            this.toastService.presentToast("Error al crear el Usuario empresa");
+            this.toastService.presentToast("Introduce un formato de email correcto");
           });
         }else if(this.checkEmpresa==true && this.empresaPass!=this.empresaPassVerify){
           //Toast generado en servicio

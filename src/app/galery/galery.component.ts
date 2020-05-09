@@ -21,28 +21,30 @@ export class GaleryComponent implements OnInit {
     private navParams:NavParams,
     private camera: Camera) { }
 
-  optionsGallery = {
+  /*optionsGallery = {
     maximumImagesCount: 1,
     width:800,
     height:800,
     quality:100,
     outputType:1
-  }
+  }*/
 
   optionsCamera: CameraOptions = {
     quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    saveToPhotoAlbum:true
+    saveToPhotoAlbum:true,
+    correctOrientation: true
   }
 
   userAlumno:UserAlumno;
   imageUrl:string;
+  
   ngOnInit() {this.userAlumno=JSON.parse(this.navParams.get('alumno'));}
 
   onClickClose(){
-    this.modalController.dismiss("../../assets/img/noimage.png");
+    this.modalController.dismiss(this.userAlumno.imagen="../../assets/img/noimage.png");
   }
 
   /*onClickOpenGallery(){
@@ -79,8 +81,8 @@ export class GaleryComponent implements OnInit {
   onClickOpenCamera(){
     this.camera.getPicture(this.optionsCamera).then(async (imageData) => {
       const loading = await this.loadingController.create({
-        message: 'Please wait...',
-        duration: 1000
+        message: 'Por favor, espera...',
+        duration: 10000
       });
       await loading.present();
       // imageData is either a base64 encoded string or a file URI

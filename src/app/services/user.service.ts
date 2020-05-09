@@ -38,7 +38,7 @@ export class UserService {
     var userId=sessionStorage.getItem('userId');
     //recorrer usuarios en firestone y comparar con el de sessionstorage
     let usersCollection:AngularFirestoreCollection=this.db.collection<User>('empresa');
-    usersCollection.valueChanges().subscribe(
+    usersCollection.valueChanges().pipe(take(1)).subscribe(
       res=>{
         res.forEach(element=> {
             //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
@@ -54,7 +54,7 @@ export class UserService {
     var userId=sessionStorage.getItem('userId');
 
     let alumnoFavCollection:AngularFirestoreCollection=this.db.collection<User>('empresa/'+empresaId+"/Favoritos/");
-    alumnoFavCollection.valueChanges().subscribe(
+    alumnoFavCollection.valueChanges().pipe(take(1)).subscribe(
       res=>{
         res.forEach(element=> {
           if(empresaId==userId){
@@ -130,6 +130,15 @@ export class UserService {
           }
         });
     });
+    let empresaFav:AngularFirestoreCollection=this.db.collection<User>('empresa');
+          empresaFav.valueChanges().pipe(take(1)).subscribe(
+            res=>{
+              res.forEach(element=> {
+                  console.log(element);
+                  this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/" + userInfo.id).delete();
+                });
+            }
+          )
   }
   async borrarEmpresaAdmin(id:string, empresa:User){
     //recorrer usuarios en firestone y comparar con el de sessionstorage

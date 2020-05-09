@@ -4,6 +4,10 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon id="mail" name="mail" (click)="onClickEmail()"></ion-icon>
+    </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -14,39 +18,39 @@
   </ion-item>
 
   <ion-item>
-    <h1>E-Mail: {{alumnoMail}}</h1>
+    <h2><b>E-Mail:</b> {{alumnoMail}}</h2>
   </ion-item>
 
   <ion-item>
-    <h1>Nombre: {{alumnoNombre}}</h1>
+    <h2><b>Nombre:</b> {{alumnoNombre}}</h2>
   </ion-item>
 
   <ion-item>
-    <h2>Edad: {{alumnoEdad}}</h2>
+    <h2><b>Edad:</b> {{alumnoEdad}}</h2>
   </ion-item>
 
   <ion-item>
-    <h3>Curso: {{alumnoCurso}}</h3>
+    <h2><b>Curso:</b> {{alumnoCurso}}</h2>
   </ion-item>
 
   <ion-item>  
-    <h4>Formacion: {{alumnoFormacion}}</h4>
+    <h2><b>Formacion:</b> {{alumnoFormacion}}</h2>
+  </ion-item>
+
+  <ion-item *ngIf="expBool"> 
+    <h2><b>Experiencia:</b> {{alumnoExperiencia}}</h2>
   </ion-item>
 
   <ion-item>  
-    <h4>Experiencia: {{alumnoExperiencia}}</h4>
+    <h2><b>Idiomas:</b> {{alumnoIdiomas}}</h2>
   </ion-item>
 
   <ion-item>  
-    <h4>Idiomas: {{alumnoIdiomas}}</h4>
+    <h2><b>Nivel:</b> {{alumnoNivel}}</h2>
   </ion-item>
 
   <ion-item>  
-    <h4>Nivel: {{alumnoNivel}}</h4>
-  </ion-item>
-
-  <ion-item>  
-    <h4>Datos: {{alumnoDatos}}</h4>
+    <h2><b>Datos:</b> {{alumnoDatos}}</h2>
   </ion-item>
   
 </ion-content>

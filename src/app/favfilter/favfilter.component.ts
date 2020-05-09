@@ -16,9 +16,14 @@ export class FavfilterComponent implements OnInit {
   alumnoFavFiltered:any;
 
   filtrarNombre:string="";
-  filtrarEdad:string="";
+  filtrarEdad:number;
   filtrarCurso:string="";
+  filtrarFormacion:string="";
   filtrarIdiomas:string="";
+  filtrarNivelIdiomas:string="";
+  filtrarDatos:string="";
+  filtrarExperiencia:boolean;
+  filtrarSinExperiencia:boolean;
 
   constructor(private db:AngularFirestore,
     private router:Router,
@@ -34,7 +39,7 @@ export class FavfilterComponent implements OnInit {
   }
 
   onClickFilterAccept(){
-    this.alumnoFavFiltered = this.alumnosListaFav;
+     this.alumnoFavFiltered = this.alumnosListaFav;
     console.log(this.alumnoFavFiltered);
 
     if(this.filtrarNombre.trim()!=""){
@@ -43,8 +48,8 @@ export class FavfilterComponent implements OnInit {
         return item.userInfo.nombreyapellidos.toLowerCase().includes(filtroNombre.toLowerCase());
       });    
     }
-    if(this.filtrarEdad.trim()!=""){
-      let filtroEdad = this.filtrarEdad.trim(); 
+    if(this.filtrarEdad!=null){
+      let filtroEdad = this.filtrarEdad; 
       this.alumnoFavFiltered = this.alumnoFavFiltered.filter(function(item:any){
         return item.userInfo.edad==filtroEdad;
       });    
@@ -55,11 +60,47 @@ export class FavfilterComponent implements OnInit {
         return item.userInfo.curso.toLowerCase().includes(filtroCurso.toLowerCase());
       });    
     }
+    if(this.filtrarFormacion.trim()!=""){
+      console.log("hola");
+      let filtroFormacion = this.filtrarFormacion.trim(); 
+      this.alumnoFavFiltered = this.alumnoFavFiltered.filter(function(item:any){
+        return item.userInfo.formacion.toLowerCase().includes(filtroFormacion.toLowerCase());
+      });    
+    }
     if(this.filtrarIdiomas.trim()!=""){
       let filtroidiomas = this.filtrarIdiomas.trim(); 
       this.alumnoFavFiltered = this.alumnoFavFiltered.filter(function(item:any){
         return item.userInfo.idiomas.toLowerCase().includes(filtroidiomas.toLowerCase());
       });    
+    }
+    if(this.filtrarNivelIdiomas.trim()!=""){
+      let filtroNivelIdiomas = this.filtrarNivelIdiomas.trim(); 
+      this.alumnoFavFiltered = this.alumnoFavFiltered.filter(function(item:any){
+        if(item.userInfo.nivel==filtroNivelIdiomas){
+        return item.userInfo.nivel;
+        }
+      });    
+    }
+    if(this.filtrarDatos.trim()!=""){
+      let filtroDatos = this.filtrarDatos.trim(); 
+      this.alumnoFavFiltered = this.alumnoFavFiltered.filter(function(item:any){
+        return item.userInfo.datos.toLowerCase().includes(filtroDatos.toLowerCase());
+      });    
+    }
+    if(this.filtrarExperiencia==true){
+      let filtroExperiencia = this.filtrarExperiencia; 
+      this.alumnoFavFiltered = this.alumnoFavFiltered.filter(function(item:any){
+        return item.userInfo.experiencia==filtroExperiencia;
+      });    
+    }
+    if(this.filtrarSinExperiencia==true){
+      let filtroSinExperiencia = false; 
+      this.alumnoFavFiltered = this.alumnoFavFiltered.filter(function(item:any){
+        return item.userInfo.experiencia==filtroSinExperiencia;
+      });    
+    }
+    if(this.filtrarSinExperiencia==true && this.filtrarExperiencia==true){
+      this.modalController.dismiss(this.alumnosListaFav);
     }
 
     console.log(this.alumnoFavFiltered);

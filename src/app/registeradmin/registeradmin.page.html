@@ -9,15 +9,15 @@
 
 <ion-content>
   <ion-item>
-    <ion-input placeholder="EMAIL" [(ngModel)]="user" expand="short"></ion-input>
-    <p class="red">{{userfail}}</p>
+    <ion-input placeholder="E-MAIL" [(ngModel)]="user" expand="short"></ion-input>
   </ion-item>
-  
+  <p class="red">{{userfail}}</p>
+
   <ion-item>
-    <ion-input type="{{tipopass}}" placeholder="PASSWORD" [(ngModel)]="pass"></ion-input>
-    <p class="red">{{passfail}}</p>
+    <ion-input type="{{tipopass}}" placeholder="CONTRASEÑA" [(ngModel)]="pass"></ion-input>
     <ion-icon id="ojo" name="eye" (click)="onClickEye()"></ion-icon>
   </ion-item>
+  <p class="red">{{passfail}}</p>
 
   <ion-item>
     <ion-label>Administrador</ion-label>
