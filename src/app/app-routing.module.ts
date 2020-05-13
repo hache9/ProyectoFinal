@@ -59,6 +59,10 @@ const routes: Routes = [
     path: 'mostrarempresa',
     loadChildren: () => import('./mostrarempresa/mostrarempresa.module').then( m => m.MostrarempresaPageModule)
   },
+  {
+    path: 'editarempresaadmin',
+    loadChildren: () => import('./editarempresaadmin/editarempresaadmin.module').then( m => m.EditarempresaadminPageModule)
+  },
 
 ];
 

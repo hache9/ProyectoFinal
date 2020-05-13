@@ -34,12 +34,12 @@ export class MostrarempresasadminPage implements OnInit {
     this.router.navigate(['mostrarempresa', {userEmpresa: JSON.stringify(empresa)}]);
   }
 
-  async onClickBorrarEmpresa(empresa:UserEmpresa){
-    const del = await this.alertController.create({
-      header: 'Confirm to delete Restaurant',
+  async onClickEditarEmpresa(empresa:UserEmpresa){
+    const edit = await this.alertController.create({
+      header: '¿Editar la empresa '+empresa.nombre+'?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
@@ -47,7 +47,31 @@ export class MostrarempresasadminPage implements OnInit {
           }
         }, 
         {
-          text: 'Accept',
+          text: 'Aceptar',
+          handler: () => {
+            this.router.navigate(['editarempresaadmin', {empresa: JSON.stringify(empresa)}]);
+        }
+      }
+    ]
+   });
+    await edit.present();
+    console.log(empresa);
+  }
+
+  async onClickBorrarEmpresa(empresa:UserEmpresa){
+    const del = await this.alertController.create({
+      header: 'Confirma para eliminar la empresa '+empresa.nombre,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, 
+        {
+          text: 'Aceptar',
           handler: () => {
             this.userService.borrarEmpresaAdmin(empresa.id, empresa);
             this.toastService.presentToast("Empresa eliminada correctamentamente");

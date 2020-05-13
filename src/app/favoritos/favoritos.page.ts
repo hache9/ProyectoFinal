@@ -27,10 +27,10 @@ export class FavoritosPage implements OnInit {
   alumnosListaFav:any;
   alumnosLista:any;
 
-  empresaId=sessionStorage.getItem("userId");
+  empresaId=sessionStorage.getItem('userId');
 
   ngOnInit() {
-    let alumnoFavCollection:AngularFirestoreCollection=this.db.collection<User>('empresa/'+this.empresaId+"/Favoritos/");
+    let alumnoFavCollection:AngularFirestoreCollection=this.db.collection<User>('empresa/'+this.empresaId+'/Favoritos/');
     alumnoFavCollection.valueChanges().subscribe(
       res=>{
           this.alumnosListaFav=res;
@@ -46,7 +46,7 @@ export class FavoritosPage implements OnInit {
   async onClickFilterFav(){
     const modal = await this.modalController.create({
       component: FavfilterComponent,
-      cssClass: "modal-css"
+      cssClass: 'modal-css'
     });
       await modal.present();
       const data=await modal.onDidDismiss();
@@ -70,7 +70,7 @@ export class FavoritosPage implements OnInit {
           text: 'Accept',
           handler: () => {
             this.userService.deleteFavorito(alumno.id, this.empresaId);
-            this.toastService.presentToast("Alumno eliminado correctamente");
+            this.toastService.presentToast('Alumno '+alumno.nombreyapellidos+' eliminado de favoritos');
         }
       }
     ]

@@ -35,7 +35,7 @@ export class RegisteradminPage implements OnInit {
     this.checkAdmin=!this.checkAdmin;
   }
 
-  onClickSaveRegister(){
+  onClickRegistrarAdmin(){
     if(this.user.trim()==""){
       this.userfail="Por favor, introduce un e-mail válido.";
     }else{

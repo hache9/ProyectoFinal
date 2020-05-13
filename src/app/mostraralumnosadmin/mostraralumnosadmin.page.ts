@@ -33,14 +33,6 @@ export class MostraralumnosadminPage implements OnInit {
         }
       )
     }
-    /*ionViewWillEnter(){
-      let alumnoCollection:AngularFirestoreCollection=this.db.collection<User>('alumno');
-      alumnoCollection.valueChanges().subscribe(
-        res=>{
-            this.alumnosLista=res;
-        }
-      )
-    }*/
 
     mostrarAlumno(userAlumno:UserAlumno){
       console.log(userAlumno);
@@ -48,16 +40,12 @@ export class MostraralumnosadminPage implements OnInit {
     }
 
     async onClickEditarAlumno(alumno:UserAlumno){
-      console.log(alumno);
-      this.router.navigate(['editaralumnoadmin', {alumno: JSON.stringify(alumno)}]);
-    }
-
-    async onClickBorrarAlumno(alumno:UserAlumno){
-      const del = await this.alertController.create({
-        header: 'Confirma para eliminar alumno',
+      //this.router.navigate(['editaralumnoadmin', {alumno: JSON.stringify(alumno)}]);
+      const edit = await this.alertController.create({
+        header: '¿Editar el alumno '+alumno.nombreyapellidos+'?',
         buttons: [
           {
-            text: 'Cancel',
+            text: 'Cancelar',
             role: 'cancel',
             cssClass: 'secondary',
             handler: () => {
@@ -65,7 +53,30 @@ export class MostraralumnosadminPage implements OnInit {
             }
           }, 
           {
-            text: 'Accept',
+            text: 'Aceptar',
+            handler: () => {
+              this.router.navigate(['editaralumnoadmin', {alumno: JSON.stringify(alumno)}]);
+          }
+        }
+      ]
+     });
+      await edit.present();
+    }
+
+    async onClickBorrarAlumno(alumno:UserAlumno){
+      const del = await this.alertController.create({
+        header: 'Confirma para eliminar alumno '+alumno.nombreyapellidos,
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel');
+            }
+          }, 
+          {
+            text: 'Aceptar',
             handler: () => {
               this.userService.borrarAlumnoAdmin(alumno.id, alumno);
               this.toastService.presentToast("alumno eliminado correctamentamente");

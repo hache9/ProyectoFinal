@@ -1,6 +1,7 @@
 import { UserEmpresa } from './../models/userEmpresa.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 @Component({
   selector: 'app-mostrarempresa',
@@ -18,7 +19,8 @@ export class MostrarempresaPage implements OnInit {
   empresaLocalidad:string;
   empresaTelefono:string;
 
-  constructor(private routeParams:ActivatedRoute) { 
+  constructor(private routeParams:ActivatedRoute,
+    private EmailComposer:EmailComposer) { 
     this.routeParams.params.subscribe(params =>{
       this.userEmpresa=JSON.parse(params['userEmpresa']);
       console.log(this.userEmpresa);
@@ -37,4 +39,10 @@ export class MostrarempresaPage implements OnInit {
   ngOnInit() {
   }
 
+  onClickEmail(){
+    console.log(this.EmailComposer);
+    this.EmailComposer.open({
+      to: this.empresaMail,
+    })
+  }
 }

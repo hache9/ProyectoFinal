@@ -65,7 +65,7 @@ export class RegisterempresaPage implements OnInit {
     this.checkEmpresa=!this.checkEmpresa;
   }
 
-  onClickSaveRegister(){
+  onClickRegistrarEmpresa(){
     if(this.user.trim()==""){
       this.userfail="Por favor, introduce e-mail.";
     }else{
@@ -124,7 +124,7 @@ export class RegisterempresaPage implements OnInit {
         this.telfInvalido="";
       }
     }
-    if(this.user.trim()!="" && this.pass.trim()!=""){
+    if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombreEmpresa.trim()!="" && this.nuevoCif.length==9 && this.nuevaCalle.trim()!="" && this.nuevoCp.toString().length==5 && this.nuevaLocalidad.trim()!="" && this.nuevoTelefono.toString().length==9){
       console.log(this.user);
       console.log(this.pass);
       if(this.checkEmpresa==true && this.empresaPass.trim()==""){
@@ -135,6 +135,7 @@ export class RegisterempresaPage implements OnInit {
         if(this.checkEmpresa==true && this.empresaPass==this.empresaPassVerify){
           console.log(this.checkEmpresa);
           console.log(this.checkAdmin);
+          
           this.service.createUserEmpresa(this.user.toLowerCase(), this.pass, this.nuevoNombreEmpresa, this.nuevoCif, this.nuevaCalle, this.nuevoCp, this.nuevaLocalidad, this.nuevoTelefono).then(() => {
             console.log("Usuario Empresa creado correctamente");
             //Toast generado en servicio

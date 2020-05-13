@@ -69,6 +69,8 @@ export class HomePage {
                 sessionStorage.setItem("user", this.user);
                 this.router.navigateByUrl('/principaladmin');
                 console.log("admin");
+                this.user="";
+                this.pass="";
               }
             });
           });
@@ -84,6 +86,8 @@ export class HomePage {
                 sessionStorage.setItem("user", this.user);
                 this.router.navigateByUrl('/principalempresa');
                 console.log("empresa");
+                this.user="";
+                this.pass="";
               }
             });
           });
@@ -100,6 +104,8 @@ export class HomePage {
                 sessionStorage.setItem("user", this.user);
                 this.router.navigate(['principalalumno', {userAlumno: JSON.stringify(element.userInfo)}]);
                 console.log("alumno");
+                this.user="";
+                this.pass="";
               }
             });
           });

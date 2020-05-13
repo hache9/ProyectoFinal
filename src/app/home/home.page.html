@@ -12,13 +12,11 @@
   </ion-item>
   
   <ion-item>
-    <!-- <ion-label position="stacked">E-Mail <ion-text color="danger">*</ion-text></ion-label> -->
     <ion-input type="text" type="email" placeholder="EMAIL" [(ngModel)]="user"></ion-input>
   </ion-item>
   <p class="red">{{userfail}}</p>
 
   <ion-item>
-    <!-- <ion-label position="stacked">Contraseña <ion-text color="danger">*</ion-text></ion-label> -->
     <ion-input type="{{tipopass}}" placeholder="Contraseña" [(ngModel)]="pass"></ion-input>
     <ion-icon id="ojo" name="eye" (click)="onClickEye()"></ion-icon>
   </ion-item>

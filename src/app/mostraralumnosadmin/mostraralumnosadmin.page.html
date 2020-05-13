@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Mostrar Alumnos</ion-title>
+    <ion-title>Alumnos</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -15,7 +15,8 @@
     <ion-item (click)="mostrarAlumno(alumno.userInfo)">             
         <ion-label>
           <h1>{{alumno.userInfo.nombreyapellidos}}</h1>
-          <h2>{{alumno.userInfo.curso}}</h2>
+          <h1>Curso: {{alumno.userInfo.curso}}</h1>
+          <p id="info">Pulsa para ver la información</p>
         </ion-label>
         <img id="img" src="{{alumno.userInfo.imagen}}">
     </ion-item>

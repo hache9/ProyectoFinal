@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Mostrar Alumnos</ion-title>
+    <ion-title>Empresa</ion-title>
     <ion-buttons slot="start">
-      <ion-button (click)="onClickClose()">Log out</ion-button>
+      <ion-button (click)="onClickClose()">Cerrar Sesión</ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-icon id="filter" name="funnel" (click)="onClickFilter()"></ion-icon>
@@ -17,7 +17,8 @@
     <ion-item (click)="mostrarAlumno(alumno.userInfo)">             
         <ion-label>
           <h1>{{alumno.userInfo.nombreyapellidos}}</h1>
-          <h2>{{alumno.userInfo.curso}}</h2>
+          <h1>Curso: {{alumno.userInfo.curso}}</h1>
+          <p id="info">Pulsa para ver la información</p>
         </ion-label>
         <img id="img" src="{{alumno.userInfo.imagen}}">
     </ion-item>

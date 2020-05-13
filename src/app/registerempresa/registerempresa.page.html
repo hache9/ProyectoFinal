@@ -29,7 +29,7 @@
 
   
   <ion-item>
-    <ion-label position="fixed">CIF:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>CIF formato tipo: "Z87654321":<ion-text color="danger">*</ion-text></ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" maxlength="9" [(ngModel)]="nuevoCif"></ion-input>
@@ -79,5 +79,5 @@
   <ion-item>
     <ion-input type="{{tipopass}}" placeholder="Empresa Password" expand="short" [(ngModel)]="empresaPass" *ngIf="empresa"></ion-input>
   </ion-item>
-  <ion-button expand="block" (click)="onClickSaveRegister()">Save</ion-button>
+  <ion-button expand="block" (click)="onClickRegistrarEmpresa()">Registrar Empresa</ion-button>
 </ion-content>

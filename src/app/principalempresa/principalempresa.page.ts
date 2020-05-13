@@ -4,8 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../models/user.interface';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { FilterComponent } from '../filter/filter.component';
+import { ToastService } from '../services/toast.service';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class PrincipalempresaPage implements OnInit {
   constructor(private db:AngularFirestore,
     private router:Router,
     private userService:UserService,
-    private modalController:ModalController) { }
+    private modalController:ModalController,
+    private alertController: AlertController,
+    private toastService:ToastService) { }
 
   alumnosLista:any;
 
@@ -47,17 +50,38 @@ export class PrincipalempresaPage implements OnInit {
   }
 
 
-  onClickFavorito(alumno:UserAlumno){
+  async onClickFavorito(alumno:UserAlumno){
     console.log(alumno.id);
-    this.userService.userFavorito(alumno);
+    //this.userService.userFavorito(alumno);
+    const edit = await this.alertController.create({
+      header: 'Añadir el alumno '+alumno.nombreyapellidos+' a favoritos?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, 
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.userService.userFavorito(alumno);
+            this.toastService.presentToast('Alumno'+alumno.nombreyapellidos+' añadido a favoritos');
+        }
+      }
+    ]
+   });
+    await edit.present();
   }
 
   onClickFavPage(){
     this.router.navigateByUrl('/favoritos');
   }
   onClickClose(){
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('userId');
     this.router.navigateByUrl('/home');
   }
 

@@ -1,3 +1,4 @@
+import { UserEmpresa } from './../models/userEmpresa.interface';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -22,7 +23,7 @@ export class UserService {
   }
 
   //Se crea una funcion para meter usuario en firestore.
-  async userEmpresa(userInfo:User){
+  async userEmpresa(userInfo:UserEmpresa){
     userInfo.id=this.db.createId();
     console.log(userInfo.admin);
     this.db.doc("empresa/" + userInfo.id).set({userInfo});
@@ -32,38 +33,6 @@ export class UserService {
   async userAlumno(userInfo:UserAlumno){
     userInfo.id=this.db.createId();
     this.db.doc("alumno/" + userInfo.id).set({userInfo});
-  }
-
-  async userFavorito(userInfo:UserAlumno){
-    var userId=sessionStorage.getItem('userId');
-    //recorrer usuarios en firestone y comparar con el de sessionstorage
-    let usersCollection:AngularFirestoreCollection=this.db.collection<User>('empresa');
-    usersCollection.valueChanges().pipe(take(1)).subscribe(
-      res=>{
-        res.forEach(element=> {
-            //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
-            if(element.userInfo.id==userId){
-            this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/"+userInfo.id).set({userInfo});
-            console.log(element.userInfo.id);
-            }
-        });
-      });
-  }
-
-  async deleteFavorito(idUserNoFav:string, empresaId:string){
-    var userId=sessionStorage.getItem('userId');
-
-    let alumnoFavCollection:AngularFirestoreCollection=this.db.collection<User>('empresa/'+empresaId+"/Favoritos/");
-    alumnoFavCollection.valueChanges().pipe(take(1)).subscribe(
-      res=>{
-        res.forEach(element=> {
-          if(empresaId==userId){
-            //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
-            this.db.doc("empresa/"+empresaId+"/Favoritos/" + idUserNoFav).delete();
-          }
-        });
-      }
-    )
   }
 
   async editUserAlumno(userInfo:UserAlumno ){
@@ -140,6 +109,24 @@ export class UserService {
             }
           )
   }
+
+  async editarEmpresaAdmin(userInfo:UserEmpresa){
+    //recorrer usuarios en firestone y comparar con el de sessionstorage
+          let usersCollection:AngularFirestoreCollection=this.db.collection<User>('empresa');
+          console.log(usersCollection.valueChanges())
+          usersCollection.valueChanges().pipe(take(1)).subscribe(
+            res=>{
+              res.forEach(element=> {
+                  console.log(element.userInfo)
+                if(element.userInfo.id==userInfo.id){
+                  console.log(userInfo.id);
+                  //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
+                  this.db.doc("empresa/"+element.userInfo.id).update({userInfo});
+                }
+              });
+            });
+  }
+
   async borrarEmpresaAdmin(id:string, empresa:User){
     //recorrer usuarios en firestone y comparar con el de sessionstorage
     let usersCollection:AngularFirestoreCollection=this.db.collection<User>('empresa');
@@ -152,6 +139,38 @@ export class UserService {
           }
         });
     });
+  }
+
+  async userFavorito(userInfo:UserAlumno){
+    var userId=sessionStorage.getItem('userId');
+    //recorrer usuarios en firestone y comparar con el de sessionstorage
+    let usersCollection:AngularFirestoreCollection=this.db.collection<User>('empresa');
+    usersCollection.valueChanges().pipe(take(1)).subscribe(
+      res=>{
+        res.forEach(element=> {
+            //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
+            if(element.userInfo.id==userId){
+            this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/"+userInfo.id).set({userInfo});
+            console.log(element.userInfo.id);
+            }
+        });
+      });
+  }
+
+  async deleteFavorito(idUserNoFav:string, empresaId:string){
+    var userId=sessionStorage.getItem('userId');
+
+    let alumnoFavCollection:AngularFirestoreCollection=this.db.collection<User>('empresa/'+empresaId+"/Favoritos/");
+    alumnoFavCollection.valueChanges().pipe(take(1)).subscribe(
+      res=>{
+        res.forEach(element=> {
+          if(empresaId==userId){
+            //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
+            this.db.doc("empresa/"+empresaId+"/Favoritos/" + idUserNoFav).delete();
+          }
+        });
+      }
+    )
   }
 
 }

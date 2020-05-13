@@ -1,8 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Registrar Alumno</ion-title>
+    <ion-title>Editar Alumno</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <!-- <ion-back-button></ion-back-button> -->
+      <ion-icon name="arrow-back-outline" id="back" (click)="onClickGoBack()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -99,5 +100,5 @@
   </ion-item>
   <p class="red">{{datosVacio}}</p>
 
-  <ion-button expand="block" (click)="onClickEditAlumno()">Editar Informacion</ion-button>
+  <ion-button expand="block" (click)="onClickEditAlumno()">Editar Información</ion-button>
 </ion-content>

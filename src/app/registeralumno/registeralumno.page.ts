@@ -87,8 +87,8 @@ nivel = [
     console.log(this.nivelIdioma);
   }
 
-  onClickSaveRegister(){
-    console.log(this.nuevaEdad);
+  onClickRegistrarAlumno(){
+    console.log(this.nuevoCurso);
     if(this.user.trim()==""){
       this.userfail="Por favor, introduce email.";
     }else{
@@ -116,12 +116,8 @@ nivel = [
     }    
     if(this.nuevoCurso.trim()==""){
       this.cursoVacio="Por favor, introduce curso.";  
-    }else{
-      if(this.nuevoCurso.trim()!="DAW" || this.nuevoCurso.trim()!="SMR" || this.nuevoCurso.trim()!="GA" || this.nuevoCurso.trim()!="FPB"){
-      this.cursoVacio="Por favor, introduce curso válido (DAW, SMR, GA. FPB).";  
-      }else if(this.nuevoCurso.trim()=="DAW" || this.nuevoCurso.trim()=="SMR" || this.nuevoCurso.trim()=="GA" || this.nuevoCurso.trim()=="FPB"){
-        this.cursoVacio="";
-      }
+    }else if(this.nuevoCurso.trim()!=""){
+      this.cursoVacio="";
     }
     if(this.nuevaFormacion.trim()==""){
       this.formacionVacia="Por favor, introduce formacion.";  
@@ -136,7 +132,6 @@ nivel = [
       }
     }
     if(this.nuevaExperiencia==false){
-      this.tiempoVacio="Por favor, introduce tiempo de experiencia.";
       this.tiempoVacio="";
       this.nuevoTiempo="";
     }
@@ -155,30 +150,80 @@ nivel = [
     }else{
       this.datosVacio="";  
     }
-    if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombre.trim()!="" && this.nuevaEdad!=null && this.nuevoCurso.trim()!="" && this.nuevaFormacion.trim()!="" && this.nuevoTiempo.trim()!="" && this.nuevosIdiomas.trim()!="" && this.nuevosDatos.trim()!=""){
+    if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombre.trim()!="" && this.nuevaEdad!=null && this.nuevoCurso.trim()!="" && this.nuevaFormacion.trim()!="" && this.nuevaExperiencia==true && this.nuevoTiempo.trim()!="" && this.nuevosIdiomas.trim()!="" && this.nuevosDatos.trim()!=""){
       console.log(this.user);
       console.log(this.pass);
-      console.log(this.nuevaExperiencia);
-      
-       this.service.createUserAlumno(this.user.toLowerCase(), this.pass, this.nuevaImagen, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevaFormacion,this.nuevaExperiencia, this.nuevoTiempo, this.nuevosIdiomas, this.nivelIdioma, this.nuevosDatos).then(() => {
-          console.log("Usuario creado correctamente");
-          //Toast generado en servicio
-          this.toastService.presentToast("Usuario creado correctamente");
-          this.user="";
-          this.pass="";
-          this.nuevoNombre="";
-          this.nuevaEdad=null;
-          this.nuevoCurso="";
-          this.nuevaExperiencia=false;
-          this.nuevaFormacion="";
-          this.nuevosIdiomas="";
-          this.nuevosDatos="";
-          this.router.navigateByUrl('/home');
-        }, error => {
-          console.log(error);
-          //Toast generado en servicio
-          this.toastService.presentToast("Error al crear el Usuario");
-          });
+
+      if(this.nuevoCurso.trim().toUpperCase()!="DAW" && this.nuevoCurso.trim().toUpperCase()!="SMR" && this.nuevoCurso.trim().toUpperCase()!="GA" && this.nuevoCurso.trim().toUpperCase()!="FPB"){
+        this.cursoVacio="Por favor, introduce curso válido (DAW, SMR, GA. FPB).";  
+        if(this.nuevaEdad<14 || this.nuevaEdad>99){
+          this.edadVacia="Por favor, introduce edad válida entre 14 y 99 años."; 
+        }else{
+          this.edadVacia="";
+        }
+        }else if(this.nuevoCurso.trim().toUpperCase()=="DAW" || this.nuevoCurso.trim().toUpperCase()=="SMR" || this.nuevoCurso.trim().toUpperCase()=="GA" || this.nuevoCurso.trim().toUpperCase()=="FPB" && this.nuevaEdad>14 || this.nuevaEdad<99){
+          this.cursoVacio="";
+          if(this.nuevaEdad>=14 && this.nuevaEdad<99){
+            this.edadVacia="";
+            this.service.createUserAlumno(this.user.toLowerCase(), this.pass, this.nuevaImagen, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevaFormacion,this.nuevaExperiencia, this.nuevoTiempo, this.nuevosIdiomas, this.nivelIdioma, this.nuevosDatos).then(() => {
+              console.log("Usuario creado correctamente");
+              //Toast generado en servicio
+              this.toastService.presentToast("Usuario creado correctamente");
+              this.user="";
+              this.pass="";
+              this.nuevoNombre="";
+              this.nuevaEdad=null;
+              this.nuevoCurso="";
+              this.nuevaExperiencia=false;
+              this.nuevaFormacion="";
+              this.nuevosIdiomas="";
+              this.nuevosDatos="";
+              this.router.navigateByUrl('/home');
+            }, error => {
+              console.log(error);
+              //Toast generado en servicio
+              this.toastService.presentToast("Formato E-mail o contraseña erroneo");
+            });
+          }
+        }
+      }
+
+      if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombre.trim()!="" && this.nuevaEdad!=null && this.nuevoCurso.trim()!="" && this.nuevaFormacion.trim()!="" && this.nuevaExperiencia==false && this.nuevoTiempo.trim()=="" && this.nuevosIdiomas.trim()!="" && this.nuevosDatos.trim()!=""){
+        console.log(this.user);
+        console.log(this.pass);
+        
+        if(this.nuevoCurso.trim().toUpperCase()!="DAW" && this.nuevoCurso.trim().toUpperCase()!="SMR" && this.nuevoCurso.trim().toUpperCase()!="GA" && this.nuevoCurso.trim().toUpperCase()!="FPB"){
+          this.cursoVacio="Por favor, introduce curso válido (DAW, SMR, GA. FPB).";  
+          if(this.nuevaEdad<14 || this.nuevaEdad>99){
+            this.edadVacia="Por favor, introduce edad válida entre 14 y 99 años."; 
+          }else{
+            this.edadVacia="";
+          }
+          }else if(this.nuevoCurso.trim().toUpperCase()=="DAW" || this.nuevoCurso.trim().toUpperCase()=="SMR" || this.nuevoCurso.trim().toUpperCase()=="GA" || this.nuevoCurso.trim().toUpperCase()=="FPB" && this.nuevaEdad>14 || this.nuevaEdad<99){
+            this.cursoVacio="";
+            if(this.nuevaEdad>=14 && this.nuevaEdad<99){
+              this.edadVacia="";
+         this.service.createUserAlumno(this.user.toLowerCase(), this.pass, this.nuevaImagen, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevaFormacion,this.nuevaExperiencia, this.nuevoTiempo, this.nuevosIdiomas, this.nivelIdioma, this.nuevosDatos).then(() => {
+            console.log("Usuario creado correctamente");
+            //Toast generado en servicio
+            this.toastService.presentToast("Usuario creado correctamente");
+            this.user="";
+            this.pass="";
+            this.nuevoNombre="";
+            this.nuevaEdad=null;
+            this.nuevoCurso="";
+            this.nuevaExperiencia=false;
+            this.nuevaFormacion="";
+            this.nuevosIdiomas="";
+            this.nuevosDatos="";
+            this.router.navigateByUrl('/home');
+          }, error => {
+            console.log(error);
+            //Toast generado en servicio
+            this.toastService.presentToast("Formato E-mail o contraseña erroneo");
+            });
+        }
+      }
       }
     }
     

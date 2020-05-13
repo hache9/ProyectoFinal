@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../services/toast.service';
 import { UserService } from '../services/user.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { GaleryComponent } from '../galery/galery.component';
 
@@ -14,8 +14,6 @@ import { GaleryComponent } from '../galery/galery.component';
   styleUrls: ['./editaralumnoadmin.page.scss'],
 })
 export class EditaralumnoadminPage implements OnInit {
- 
-  tipopass:string="password";
 
   alumno:UserAlumno;
   userEdited:UserAlumno;
@@ -75,7 +73,8 @@ nivel = [
     private toastService:ToastService,
     private userService:UserService,
     private modalController:ModalController,
-    private db:AngularFirestore) {
+    private db:AngularFirestore,
+    private alertController: AlertController) {
     this.routeParams.params.subscribe(params =>{
       this.alumno=JSON.parse(params['alumno']);
       this.alumnoImagen=this.alumno.imagen;
@@ -95,11 +94,11 @@ nivel = [
    ngOnInit() {
     this.expBool=this.alumno.experiencia;
     console.log(this.textNivel);
-    this.isChecked=this.isRadioChecked();
+    //this.isChecked=this.isRadioChecked();
     console.log(this.isChecked);
   }
 
-  isRadioChecked(){
+  /*isRadioChecked(){
     switch(this.textNivel){
       case "A1":
         return true;
@@ -114,7 +113,7 @@ nivel = [
       case "C2":
         return true;
     }
-  }
+  }*/
 
   radioGroupChange(event) {
     this.textNivel = event.detail.value;
@@ -134,8 +133,13 @@ nivel = [
     if(this.textEdad==null){
       this.edadVacia="Por favor, introduce edad.";  
     }else{
-      this.edadVacia="";  
-    }
+      this.edadVacia="";
+      if(this.textEdad<14 || this.textEdad>99){
+        this.edadVacia="Por favor, introduce edad válida entre 14 y 99 años."; 
+      }else{
+        this.edadVacia=""; 
+      }
+    }  
     if(this.textCurso.trim()==""){
       this.cursoVacio="Por favor, introduce curso.";  
     }else{
@@ -157,12 +161,6 @@ nivel = [
       this.tiempoVacio="";
       this.textTiempo="";
     }
-    /*if(this.textTiempo.trim()==""){
-      this.tiempoVacio="Por favor introduce cuanto tiempo de experiencia tienes.";  
-      console.log("error");
-    }else{
-      this.tiempoVacio="";  
-    }*/
     if(this.textIdiomas.trim()==""){
       this.idiomasVacio="Por favor, introduce idiomas.";  
     }else{
@@ -184,7 +182,20 @@ nivel = [
     }else{
       this.datosVacio="";  
     }
-    if(this.textNombre.trim()!="" && this.textEdad!=null && this.textCurso.trim()!="" && this.textFormacion.trim()!="" && this.textIdiomas.trim()!="" && this.textNivel.trim()!="" && this.textDatos.trim()!=""){
+    if(this.textNombre.trim()!="" && this.textEdad!=null && this.textCurso.trim()!="" && this.textFormacion.trim()!="" && this.expBool==true && this.textTiempo && this.textIdiomas.trim()!="" && this.textNivel.trim()!="" && this.textDatos.trim()!=""){
+      
+      if(this.textCurso.trim().toUpperCase()!="DAW" && this.textCurso.trim().toUpperCase()!="SMR" && this.textCurso.trim().toUpperCase()!="GA" && this.textCurso.trim().toUpperCase()!="FPB"){
+        this.cursoVacio="Por favor, introduce curso válido (DAW, SMR, GA. FPB).";  
+        if(this.textEdad<14 || this.textEdad>99){
+          this.edadVacia="Por favor, introduce edad válida entre 14 y 99 años."; 
+        }else{
+          this.edadVacia="";
+        }
+        }else if(this.textCurso.trim().toUpperCase()=="DAW" || this.textCurso.trim().toUpperCase()=="SMR" || this.textCurso.trim().toUpperCase()=="GA" || this.textCurso.trim().toUpperCase()=="FPB" && this.textEdad>14 || this.textEdad<99){
+          this.cursoVacio="";
+          if(this.textEdad>=14 && this.textEdad<99){
+            this.edadVacia="";
+
       this.userEdited={
         id:this.alumno.id,
         mail:this.alumno.mail,
@@ -216,27 +227,43 @@ nivel = [
         });
     }
   }
-
-  onClickEye(){
-    if(this.tipopass=="password"){
-        this.tipopass="text";
-    }else{
-        this.tipopass="password"
-    }
+}
   }
 
   async onClickSelectImage(){
-    this.userAlumno.id=this.db.createId();
     console.log("Seleccionar imagen");
     const modal = await this.modalController.create({
       component: GaleryComponent,
       cssClass: "gallery-modal",
       componentProps:{
-        'alumno': JSON.stringify(this.userAlumno)
+        'alumno': JSON.stringify(this.alumno)
       }
     });
       await modal.present();
       const data=await modal.onDidDismiss();
       this.alumnoImagen=data.data;
+  }
+
+  async onClickGoBack(){
+    const back = await this.alertController.create({
+      header: 'Si sales no se guardará la información editada.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, 
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.router.navigateByUrl('mostraralumnosadmin');
+        }
+      }
+    ]
+   });
+    await back.present();
   }
 }

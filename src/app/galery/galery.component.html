@@ -12,8 +12,15 @@
       <p>Pulsa el botón para abrir la camara del dispositivo.</p>
   </ion-item>
   <ion-item>
+      <p>Pulsa <b>X</b> para eliminar tu foto actual.</p>
+  </ion-item>
+  <ion-item>
+    <p>En caso de pulsar la <b>X</b> por accidente, pulsar <b>Mantener Actual</b>.</p>
+</ion-item>
+  <ion-item>
    <!--<ion-button id="gallery" (click)="onClickOpenGallery()">Gallery</ion-button>-->
     <ion-button id="camera" (click)="onClickOpenCamera()">Camara</ion-button>
+    <ion-button id="actual" (click)="onClickMantenerFoto()">Mantener Actual</ion-button>
   </ion-item>
 
 </ion-content>

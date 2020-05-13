@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Mostrar Alumnos Favoritos</ion-title>
+    <ion-title>Favoritos</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -16,6 +16,7 @@
         <ion-label>
           <h1>{{alumno.userInfo.nombreyapellidos}}</h1>
           <h2>{{alumno.userInfo.curso}}</h2>
+          <p id="info">Pulsa para ver la información</p>
         </ion-label>
         <img id="img" src="{{alumno.userInfo.imagen}}">
     </ion-item>
