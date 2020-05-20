@@ -56,7 +56,7 @@ export class FavoritosPage implements OnInit {
 
   async onClickNoFavorito(alumno:UserAlumno){
     const del = await this.alertController.create({
-      header: 'Confirma para editar alumno de favoritos.',
+      header: 'Confirma para eliminar a '+alumno.nombreyapellidos+' de favoritos.',
       buttons: [
         {
           text: 'Cancel',

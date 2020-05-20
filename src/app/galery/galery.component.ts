@@ -41,7 +41,9 @@ export class GaleryComponent implements OnInit {
   userAlumno:UserAlumno;
   imageUrl:string;
   
-  ngOnInit() {this.userAlumno=JSON.parse(this.navParams.get('alumno'));}
+  ngOnInit() {
+    this.userAlumno=JSON.parse(this.navParams.get('alumno'));
+}
 
   onClickClose(){
     this.modalController.dismiss("../../assets/img/noimage.png");
@@ -112,7 +114,12 @@ export class GaleryComponent implements OnInit {
   }
 
   onClickMantenerFoto(){
+    console.log(this.userAlumno.imagen);
+    if(this.userAlumno.imagen.trim()==""){
+      console.log("Hola");
+      this.userAlumno.imagen="../../assets/img/noimage.png";
+    }
     this.modalController.dismiss(this.userAlumno.imagen);
+    
   }
-
 }

@@ -74,7 +74,7 @@ export class MostrarempresasadminPage implements OnInit {
           text: 'Aceptar',
           handler: () => {
             this.userService.borrarEmpresaAdmin(empresa.id, empresa);
-            this.toastService.presentToast("Empresa eliminada correctamentamente");
+            this.toastService.presentToast('Empresa '+empresa.nombre+' eliminada correctamentamente');
         }
       }
     ]
