@@ -1,3 +1,4 @@
+import { FilterempresasadminComponent } from './../filterempresasadmin/filterempresasadmin.component';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -19,7 +20,8 @@ export class MostrarempresasadminPage implements OnInit {
     private router:Router,
     private userService:UserService,
     private alertController: AlertController,
-    private toastService:ToastService) { }
+    private toastService:ToastService,
+    private modalController:ModalController) { }
 
   ngOnInit() {
     let alumnoCollection:AngularFirestoreCollection=this.db.collection<UserEmpresa>('empresa');
@@ -82,6 +84,17 @@ export class MostrarempresasadminPage implements OnInit {
     await del.present();
     console.log(empresa);
   }
+
+  async onClickFilter(){
+    const modal = await this.modalController.create({
+      component: FilterempresasadminComponent,
+      cssClass: "modal-css"
+    });
+      await modal.present();
+      const data=await modal.onDidDismiss();
+      this.empresasLista=data.data;
+  }
+
 
   onClickClose(){
     sessionStorage.removeItem("user");

@@ -129,7 +129,7 @@ export class HomePage {
   //Restablecer Contraseña
   async onClickForgot(){
     const alert = await this.alertController.create({
-      header: 'Por favor, escribe tu E-Mail',
+      header: 'Introduce tu E-Mail',
       inputs: [
         {
           name: 'email',
@@ -157,8 +157,8 @@ export class HomePage {
             this.toastService.presentToast("Correo enviado correctamente");
         }, error => {
             console.log(error);
-            console.log("Error, correo no existente");
-            this.toastService.presentToast("Error, correo no existente");
+            console.log("Error, el correo no existe");
+            this.toastService.presentToast("Error, el correo no existe");
           });
         }
       }

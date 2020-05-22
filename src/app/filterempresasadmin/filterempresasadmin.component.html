@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Filtrar</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClickClose()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <h3><b>Para limpiar el filtro pulsa el boton con los campos vacíos.</b></h3>
+  </ion-item>
+
+  <ion-item>
+    <ion-label><b>E-mail:</b></ion-label>
+    <ion-input type="text" placeholder="E-mail." [(ngModel)]="filtrarEmail"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label><b>Nombre:</b></ion-label>
+    <ion-input type="text" placeholder="Nombre." [(ngModel)]="filtrarNombre"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label><b>Localidad:</b></ion-label>
+    <ion-input type="text" placeholder="Localidad:" [(ngModel)]="filtrarLocalidad"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label><b>Teléfono:</b></ion-label>
+    <ion-input type="text" placeholder="Teléfono:" [(ngModel)]="filtrarTelefono"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-button id="filter" (click)="onClickFilterAccept()">Filtrar</ion-button>
+  </ion-item>
+</ion-content>

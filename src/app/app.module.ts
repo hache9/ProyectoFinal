@@ -26,11 +26,12 @@ import { FormsModule } from '@angular/forms';
 import { FilterComponent } from './filter/filter.component';
 import { FavfilterComponent } from './favfilter/favfilter.component';
 import { FilteralumnosadminComponent } from './filteralumnosadmin/filteralumnosadmin.component';
+import { FilterempresasadminComponent } from './filterempresasadmin/filterempresasadmin.component';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 @NgModule({
-  declarations: [AppComponent, GaleryComponent, FilterComponent, FavfilterComponent, FilteralumnosadminComponent],
-  entryComponents: [GaleryComponent,FilterComponent, FavfilterComponent, FilteralumnosadminComponent],
+  declarations: [AppComponent, GaleryComponent, FilterComponent, FavfilterComponent, FilteralumnosadminComponent, FilterempresasadminComponent],
+  entryComponents: [GaleryComponent,FilterComponent, FavfilterComponent, FilteralumnosadminComponent, FilterempresasadminComponent],
   imports: [BrowserModule, 
     IonicModule.forRoot(),
      AppRoutingModule,
@@ -50,6 +51,7 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
     FilterComponent,
     FavfilterComponent,
     FilteralumnosadminComponent,
+    FilterempresasadminComponent,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     EmailComposer
   ],
