@@ -88,7 +88,7 @@ export class MostrarempresasadminPage implements OnInit {
   async onClickFilter(){
     const modal = await this.modalController.create({
       component: FilterempresasadminComponent,
-      cssClass: "modal-css"
+      cssClass: "modal-css-empresa"
     });
       await modal.present();
       const data=await modal.onDidDismiss();
