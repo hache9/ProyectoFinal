@@ -182,7 +182,7 @@ nivel = [
     }else{
       this.datosVacio="";  
     }
-    if(this.textNombre.trim()!="" && this.textEdad!=null && this.textCurso.trim()!="" && this.textFormacion.trim()!="" && this.expBool==true && this.textTiempo && this.textIdiomas.trim()!="" && this.textNivel.trim()!="" && this.textDatos.trim()!=""){
+    if(this.textNombre.trim()!="" && this.textEdad!=null && this.textCurso.trim()!="" && this.textFormacion.trim()!="" && this.expBool==true && this.textTiempo.trim()!="" || this.expBool==false && this.textTiempo.trim()=="" && this.textIdiomas.trim()!="" && this.textNivel.trim()!="" && this.textDatos.trim()!=""){
       
       if(this.textCurso.trim().toUpperCase()!="DAW" && this.textCurso.trim().toUpperCase()!="SMR" && this.textCurso.trim().toUpperCase()!="GA" && this.textCurso.trim().toUpperCase()!="FPB"){
         this.cursoVacio="Por favor, introduce curso válido (DAW, SMR, GA. FPB).";  
