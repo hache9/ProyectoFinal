@@ -66,10 +66,10 @@ export class AuthenticationService {
         this.user.admin=admin;
         this.user.empresa=empresa;
         this.userService.userAdmin(this.user);
-        console.log(newCredential);
+        //console.log(newCredential);
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         throw new Error(error);
       });
   }
@@ -89,10 +89,10 @@ export class AuthenticationService {
         this.userEmpresa.localidad=nuevaLocalidad;
         this.userEmpresa.telefono=nuevoTelefono;
         this.userService.userEmpresa(this.userEmpresa);
-        console.log(newCredential);
+        //console.log(newCredential);
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         throw new Error(error);
       });
   }
@@ -100,7 +100,7 @@ export class AuthenticationService {
   async createUserAlumno(mail:string, password:string, imagen:string, nombreyapellidos:string, edad:number, curso:string, formacion:string, experiencia:boolean, tiempo:string, idiomas:string, nivel:string, datos:string ){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,password)
       .then((newCredential:firebase.auth.UserCredential) => {
-        console.log(experiencia);
+        //console.log(experiencia);
         //para que funcione firestore
         this.userAlumno.mail=mail;
         this.userAlumno.password=password;
@@ -117,10 +117,10 @@ export class AuthenticationService {
         this.userAlumno.admin=false;
         this.userAlumno.empresa=false;
         this.userService.userAlumno(this.userAlumno);
-        console.log(newCredential);
+        //console.log(newCredential);
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         throw new Error(error);
       });
   }
@@ -128,10 +128,10 @@ export class AuthenticationService {
   async loginUser(mail:string, password:string){
     return this.afAuth.auth.signInWithEmailAndPassword(mail,password)
       .then((newCredential:firebase.auth.UserCredential) => {
-        console.log(newCredential);
+        //console.log(newCredential);
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         throw new Error(error);
       });
   }
@@ -139,10 +139,10 @@ export class AuthenticationService {
   async forgotUser(mail:string){
     return this.afAuth.auth.sendPasswordResetEmail(mail)
       .then(() => {
-        console.log(mail);
+        //console.log(mail);
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         throw new Error(error);
       });
   }

@@ -35,7 +35,7 @@ export class MostraralumnosadminPage implements OnInit {
     }
 
     mostrarAlumno(userAlumno:UserAlumno){
-      console.log(userAlumno);
+      //console.log(userAlumno);
       this.router.navigate(['mostraralumno', {userAlumno: JSON.stringify(userAlumno)}]);
     }
 
@@ -49,7 +49,7 @@ export class MostraralumnosadminPage implements OnInit {
             role: 'cancel',
             cssClass: 'secondary',
             handler: () => {
-              console.log('Confirm Cancel');
+              //console.log('Confirm Cancel');
             }
           }, 
           {
@@ -72,7 +72,7 @@ export class MostraralumnosadminPage implements OnInit {
             role: 'cancel',
             cssClass: 'secondary',
             handler: () => {
-              console.log('Confirm Cancel');
+              //console.log('Confirm Cancel');
             }
           }, 
           {
@@ -85,7 +85,7 @@ export class MostraralumnosadminPage implements OnInit {
       ]
      });
       await del.present();
-      console.log(alumno);
+      //console.log(alumno);
     }
 
     onClickClose(){

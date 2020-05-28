@@ -47,17 +47,17 @@ export class RegisteradminPage implements OnInit {
       this.passfail="";
     }
     if(this.user.trim()!="" && this.pass.trim()!=""){
-      console.log(this.user);
-      console.log(this.pass);
+      //console.log(this.user);
+      //console.log(this.pass);
       
       if(this.checkAdmin==true && this.adminPass.trim()==""){
         //Toast generado en servicio
         this.toastService.presentToast("Contraseña administrador vacía.");
       }else{
         if(this.checkAdmin==true && this.adminPass==this.adminPassVerify){
-          console.log(this.checkAdmin);
+          //console.log(this.checkAdmin);
           this.service.createUserAdmin(this.user.toLowerCase(), this.pass, this.checkAdmin, this.checkEmpresa).then(() => {
-            console.log("Usuario Admin creado correctamente");
+            //console.log("Usuario Admin creado correctamente");
             //Toast generado en servicio
             this.toastService.presentToast("Usuario Administrador creado correctamente");
             this.user="";
@@ -66,7 +66,7 @@ export class RegisteradminPage implements OnInit {
             this.router.navigateByUrl('/home');
 
           }, error => {
-            console.log(error);
+            //console.log(error);
             //Toast generado en servicio
             this.toastService.presentToast("Introduce un formato de email correcto");
           });

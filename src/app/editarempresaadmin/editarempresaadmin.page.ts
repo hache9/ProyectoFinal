@@ -79,7 +79,7 @@ export class EditarempresaadminPage implements OnInit {
       if(this.textCif.length!=9){
         this.cifInvalido="Por favor introduce 9 carácteres válidos";  
       }else if(this.textCif.length==9){
-        console.log(this.textCif.length);
+        //console.log(this.textCif.length);
         this.cifInvalido="";
       } 
     }
@@ -95,7 +95,7 @@ export class EditarempresaadminPage implements OnInit {
       if(this.textCp.toString().length!=5){
         this.cpInvalido="Por favor introduce 5 carácteres numéricos";  
       }else if(this.textCp.toString().length==5){
-        console.log(this.textCp.toString().length);
+        //console.log(this.textCp.toString().length);
         this.cpInvalido="";
       }
     }
@@ -111,7 +111,7 @@ export class EditarempresaadminPage implements OnInit {
       if(this.textTelefono.toString().length!=9){
         this.telfInvalido="Por favor introduce 9 carácteres numéricos";  
       }else if(this.textTelefono.toString().length==9){
-        console.log(this.textTelefono.toString().length);
+        //console.log(this.textTelefono.toString().length);
         this.telfInvalido="";
       }
     }
@@ -130,12 +130,12 @@ export class EditarempresaadminPage implements OnInit {
         telefono:this.textTelefono
       }
       this.userService.editarEmpresaAdmin(this.userEdited).then(() => {
-        console.log("Usuario Empresa editado correctamente");
+          //console.log("Usuario Empresa editado correctamente");
           //Toast generado en servicio
           this.toastService.presentToast("Usuario Empresa editado correctamente");
           this.router.navigateByUrl('mostrarempresasadmin');
       }, error => {
-          console.log(error);
+          //console.log(error);
           //Toast generado en servicio
           this.toastService.presentToast("Error al editar el Usuario Empresa");
       });
@@ -151,7 +151,7 @@ export class EditarempresaadminPage implements OnInit {
             role: 'cancel',
             cssClass: 'secondary',
             handler: () => {
-              console.log('Confirm Cancel');
+              //console.log('Confirm Cancel');
             }
           }, 
           {

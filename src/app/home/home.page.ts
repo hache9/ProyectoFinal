@@ -34,7 +34,7 @@ export class HomePage {
   }
 
   async onClickLogin() {
-    console.log(this.user);
+    //console.log(this.user);
     if (this.user.trim() == "") {
       this.userfail = "Por favor, introduce e-mail.";
     } else {
@@ -46,12 +46,12 @@ export class HomePage {
       this.passfail = "";
     }
     if (this.user.trim() !== "" && this.pass.trim() !== "") {
-      console.log(this.user + " " + this.pass);
+      //console.log(this.user + " " + this.pass);
       //Authenticate
       this.authservice.loginUser(this.user, this.pass).then(() => {
-        console.log(this.user);
+        //console.log(this.user);
         sessionStorage.setItem("user", this.user);
-        console.log("Usuario logueado correctamente");
+        //console.log("Usuario logueado correctamente");
         //Toast generado en servicio
         this.toastService.presentToast("Usuario logueado correctamente");
 
@@ -68,7 +68,7 @@ export class HomePage {
                 sessionStorage.setItem("userId", element.userInfo.id);
                 sessionStorage.setItem("user", this.user);
                 this.router.navigateByUrl('/principaladmin');
-                console.log("admin");
+                //("admin");
                 this.user="";
                 this.pass="";
               }
@@ -85,7 +85,7 @@ export class HomePage {
                 sessionStorage.setItem("userId", element.userInfo.id);
                 sessionStorage.setItem("user", this.user);
                 this.router.navigateByUrl('/principalempresa');
-                console.log("empresa");
+                //console.log("empresa");
                 this.user="";
                 this.pass="";
               }
@@ -103,7 +103,7 @@ export class HomePage {
                 sessionStorage.setItem("userId", element.userInfo.id);
                 sessionStorage.setItem("user", this.user);
                 this.router.navigate(['principalalumno', {userAlumno: JSON.stringify(element.userInfo)}]);
-                console.log("alumno");
+                //console.log("alumno");
                 this.user="";
                 this.pass="";
               }
@@ -111,7 +111,7 @@ export class HomePage {
           });
 
       }, error => {
-        console.log(error);
+        //console.log(error);
 
         //Condiciones de mensaje de error.
         if(error.message.includes("email") || error.message.includes("user") ){
@@ -144,20 +144,20 @@ export class HomePage {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            //console.log('Confirm Cancel');
           }
         }, 
         {
           text: 'Aceptar',
           handler: (alertData) => {
-            console.log(alertData.email);
+            //console.log(alertData.email);
             //Forgot user
             this.authservice.forgotUser(alertData.email).then(() => {
-            console.log("Correo enviado correctamente");
+            //console.log("Correo enviado correctamente");
             this.toastService.presentToast("Correo enviado correctamente");
         }, error => {
-            console.log(error);
-            console.log("Error, el correo no existe");
+            //console.log(error);
+            //console.log("Error, el correo no existe");
             this.toastService.presentToast("Error, el correo no existe");
           });
         }

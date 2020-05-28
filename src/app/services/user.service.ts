@@ -25,7 +25,7 @@ export class UserService {
   //Se crea una funcion para meter usuario en firestore.
   async userEmpresa(userInfo:UserEmpresa){
     userInfo.id=this.db.createId();
-    console.log(userInfo.admin);
+    //console.log(userInfo.admin);
     this.db.doc("empresa/" + userInfo.id).set({userInfo});
   }
 
@@ -38,13 +38,13 @@ export class UserService {
   async editUserAlumno(userInfo:UserAlumno ){
     //recorrer usuarios en firestone y comparar con el de sessionstorage
     let usersCollection:AngularFirestoreCollection=this.db.collection<User>('alumno');
-    console.log(usersCollection.valueChanges())
+    //console.log(usersCollection.valueChanges())
     usersCollection.valueChanges().pipe(take(1)).subscribe(
       res=>{
         res.forEach(element=> {
-            console.log(element.userInfo)
+            //console.log(element.userInfo)
           if(element.userInfo.id==userInfo.id){
-            console.log(userInfo.id);
+            //console.log(userInfo.id);
             //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
             this.db.doc("alumno/"+element.userInfo.id).update({userInfo});
           }
@@ -54,7 +54,7 @@ export class UserService {
           empresaFav.valueChanges().pipe(take(1)).subscribe(
             res=>{
               res.forEach(element=> {
-                  console.log(element);
+                  //console.log(element);
                   this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/" + userInfo.id).update({userInfo});
                 });
             }
@@ -64,13 +64,13 @@ export class UserService {
   async editarAlumnoAdmin(userInfo:UserAlumno){
      //recorrer usuarios en firestone y comparar con el de sessionstorage
     let usersCollection:AngularFirestoreCollection=this.db.collection<User>('alumno');
-    console.log(usersCollection.valueChanges())
+    //console.log(usersCollection.valueChanges())
     usersCollection.valueChanges().pipe(take(1)).subscribe(
       res=>{
         res.forEach(element=> {
-            console.log(element.userInfo)
+            //console.log(element.userInfo)
           if(element.userInfo.id==userInfo.id){
-            console.log(userInfo.id);
+            //console.log(userInfo.id);
             //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
             this.db.doc("alumno/"+element.userInfo.id).update({userInfo});
           }
@@ -80,7 +80,7 @@ export class UserService {
           empresaFav.valueChanges().pipe(take(1)).subscribe(
             res=>{
               res.forEach(element=> {
-                  console.log(element);
+                  //console.log(element);
                   this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/" + userInfo.id).update({userInfo});
                 });
             }
@@ -93,7 +93,7 @@ export class UserService {
     usersCollection.valueChanges().subscribe(
       res=>{
         res.forEach(element=> {
-          console.log(id);
+          //console.log(id);
           if(element.userInfo.mail==userInfo.mail){
             this.db.doc("alumno/"+id).delete();
           }
@@ -103,7 +103,7 @@ export class UserService {
           empresaFav.valueChanges().pipe(take(1)).subscribe(
             res=>{
               res.forEach(element=> {
-                  console.log(element);
+                  //console.log(element);
                   this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/" + userInfo.id).delete();
                 });
             }
@@ -113,13 +113,13 @@ export class UserService {
   async editarEmpresaAdmin(userInfo:UserEmpresa){
     //recorrer usuarios en firestone y comparar con el de sessionstorage
           let usersCollection:AngularFirestoreCollection=this.db.collection<User>('empresa');
-          console.log(usersCollection.valueChanges())
+          //console.log(usersCollection.valueChanges())
           usersCollection.valueChanges().pipe(take(1)).subscribe(
             res=>{
               res.forEach(element=> {
-                  console.log(element.userInfo)
+                  //console.log(element.userInfo)
                 if(element.userInfo.id==userInfo.id){
-                  console.log(userInfo.id);
+                  //console.log(userInfo.id);
                   //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
                   this.db.doc("empresa/"+element.userInfo.id).update({userInfo});
                 }
@@ -133,7 +133,7 @@ export class UserService {
     usersCollection.valueChanges().subscribe(
       res=>{
         res.forEach(element=> {
-          console.log(id);
+          //(id);
           if(element.userInfo.mail==empresa.mail){
             this.db.doc("empresa/"+id).delete();
           }
@@ -151,7 +151,7 @@ export class UserService {
             //la coleccion se crea dentro del usuario mediante la id guardada en sessionstorage
             if(element.userInfo.id==userId){
             this.db.doc("empresa/"+element.userInfo.id+"/Favoritos/"+userInfo.id).set({userInfo});
-            console.log(element.userInfo.id);
+            //console.log(element.userInfo.id);
             }
         });
       });

@@ -40,7 +40,7 @@ export class FavfilterComponent implements OnInit {
 
   onClickFilterAccept(){
      this.alumnoFavFiltered = this.alumnosListaFav;
-    console.log(this.alumnoFavFiltered);
+      //console.log(this.alumnoFavFiltered);
 
     if(this.filtrarNombre.trim()!=""){
       let filtroNombre = this.filtrarNombre.trim(); 
@@ -61,7 +61,6 @@ export class FavfilterComponent implements OnInit {
       });    
     }
     if(this.filtrarFormacion.trim()!=""){
-      console.log("hola");
       let filtroFormacion = this.filtrarFormacion.trim(); 
       this.alumnoFavFiltered = this.alumnoFavFiltered.filter(function(item:any){
         return item.userInfo.formacion.toLowerCase().includes(filtroFormacion.toLowerCase());
@@ -103,7 +102,7 @@ export class FavfilterComponent implements OnInit {
       this.modalController.dismiss(this.alumnosListaFav);
     }
 
-    console.log(this.alumnoFavFiltered);
+    //console.log(this.alumnoFavFiltered);
 
     this.router.navigateByUrl('favoritos');
 

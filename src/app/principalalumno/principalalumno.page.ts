@@ -27,8 +27,8 @@ export class PrincipalalumnoPage implements OnInit {
     private router:Router) {
     this.routeParams.params.subscribe(params =>{
       this.userAlumno=JSON.parse(params['userAlumno']);
-      console.log(this.userAlumno);
-      console.log(params);
+      //console.log(this.userAlumno);
+      //console.log(params);
       this.alumnoImagen=this.userAlumno.imagen;
       this.alumnoMail=this.userAlumno.mail;
       this.alumnoNombre=this.userAlumno.nombreyapellidos;
@@ -48,7 +48,7 @@ export class PrincipalalumnoPage implements OnInit {
   }
 
   onClickEditar(userAlumno:UserAlumno){
-    console.log(userAlumno)
+    //console.log(userAlumno)
     this.router.navigate(['editaralumno', {userAlumno: JSON.stringify(userAlumno)}]);
   }
 

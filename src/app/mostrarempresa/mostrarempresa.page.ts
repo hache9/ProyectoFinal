@@ -23,8 +23,8 @@ export class MostrarempresaPage implements OnInit {
     private EmailComposer:EmailComposer) { 
     this.routeParams.params.subscribe(params =>{
       this.userEmpresa=JSON.parse(params['userEmpresa']);
-      console.log(this.userEmpresa);
-      console.log(params);
+      //console.log(this.userEmpresa);
+      //console.log(params);
       this.empresaMail=this.userEmpresa.mail;
       this.empresaNombre=this.userEmpresa.nombre;
       this.empresaCif=this.userEmpresa.cif;
@@ -40,7 +40,7 @@ export class MostrarempresaPage implements OnInit {
   }
 
   onClickEmail(){
-    console.log(this.EmailComposer);
+    //console.log(this.EmailComposer);
     this.EmailComposer.open({
       to: this.empresaMail,
     })

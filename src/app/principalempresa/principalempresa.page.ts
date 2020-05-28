@@ -35,7 +35,7 @@ export class PrincipalempresaPage implements OnInit {
   }
 
   mostrarAlumno(userAlumno:UserAlumno){
-    console.log(userAlumno);
+    //console.log(userAlumno);
     this.router.navigate(['mostraralumno', {userAlumno: JSON.stringify(userAlumno)}]);
   }
 
@@ -51,7 +51,7 @@ export class PrincipalempresaPage implements OnInit {
 
 
   async onClickFavorito(alumno:UserAlumno){
-    console.log(alumno.id);
+    //console.log(alumno.id);
     //this.userService.userFavorito(alumno);
     const edit = await this.alertController.create({
       header: 'Añadir el alumno '+alumno.nombreyapellidos+' a favoritos?',
@@ -61,7 +61,7 @@ export class PrincipalempresaPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            //console.log('Confirm Cancel');
           }
         }, 
         {

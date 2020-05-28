@@ -79,16 +79,16 @@ nivel = [
     private db:AngularFirestore) { }
 
   ngOnInit() {
-    console.log(this.nuevaExperiencia);
+    //console.log(this.nuevaExperiencia);
   }
 
   radioGroupChange(event) {
     this.nivelIdioma = event.detail.value;
-    console.log(this.nivelIdioma);
+    //console.log(this.nivelIdioma);
   }
 
   onClickRegistrarAlumno(){
-    console.log(this.nuevoCurso);
+    //console.log(this.nuevoCurso);
     if(this.user.trim()==""){
       this.userfail="Por favor, introduce email.";
     }else{
@@ -151,8 +151,8 @@ nivel = [
       this.datosVacio="";  
     }
     if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombre.trim()!="" && this.nuevaEdad!=null && this.nuevoCurso.trim()!="" && this.nuevaFormacion.trim()!="" && this.nuevaExperiencia==true && this.nuevoTiempo.trim()!="" && this.nuevosIdiomas.trim()!="" && this.nuevosDatos.trim()!=""){
-      console.log(this.user);
-      console.log(this.pass);
+      //console.log(this.user);
+      //console.log(this.pass);
 
       if(this.nuevoCurso.trim().toUpperCase()!="DAW" && this.nuevoCurso.trim().toUpperCase()!="SMR" && this.nuevoCurso.trim().toUpperCase()!="GA" && this.nuevoCurso.trim().toUpperCase()!="FPB"){
         this.cursoVacio="Por favor, introduce curso válido (DAW, SMR, GA. FPB).";  
@@ -166,7 +166,7 @@ nivel = [
           if(this.nuevaEdad>=14 && this.nuevaEdad<99){
             this.edadVacia="";
             this.service.createUserAlumno(this.user.toLowerCase(), this.pass, this.nuevaImagen, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevaFormacion,this.nuevaExperiencia, this.nuevoTiempo, this.nuevosIdiomas, this.nivelIdioma, this.nuevosDatos).then(() => {
-              console.log("Usuario creado correctamente");
+              //console.log("Usuario creado correctamente");
               //Toast generado en servicio
               this.toastService.presentToast("Usuario creado correctamente");
               this.user="";
@@ -180,7 +180,7 @@ nivel = [
               this.nuevosDatos="";
               this.router.navigateByUrl('/home');
             }, error => {
-              console.log(error);
+              //console.log(error);
               //Toast generado en servicio
               this.toastService.presentToast("Formato E-mail o contraseña erroneo");
             });
@@ -189,8 +189,8 @@ nivel = [
       }
 
       if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombre.trim()!="" && this.nuevaEdad!=null && this.nuevoCurso.trim()!="" && this.nuevaFormacion.trim()!="" && this.nuevaExperiencia==false && this.nuevoTiempo.trim()=="" && this.nuevosIdiomas.trim()!="" && this.nuevosDatos.trim()!=""){
-        console.log(this.user);
-        console.log(this.pass);
+        //console.log(this.user);
+        //console.log(this.pass);
         
         if(this.nuevoCurso.trim().toUpperCase()!="DAW" && this.nuevoCurso.trim().toUpperCase()!="SMR" && this.nuevoCurso.trim().toUpperCase()!="GA" && this.nuevoCurso.trim().toUpperCase()!="FPB"){
           this.cursoVacio="Por favor, introduce curso válido (DAW, SMR, GA. FPB).";  
@@ -204,7 +204,7 @@ nivel = [
             if(this.nuevaEdad>=14 && this.nuevaEdad<99){
               this.edadVacia="";
          this.service.createUserAlumno(this.user.toLowerCase(), this.pass, this.nuevaImagen, this.nuevoNombre,this.nuevaEdad, this.nuevoCurso, this.nuevaFormacion,this.nuevaExperiencia, this.nuevoTiempo, this.nuevosIdiomas, this.nivelIdioma, this.nuevosDatos).then(() => {
-            console.log("Usuario creado correctamente");
+            //console.log("Usuario creado correctamente");
             //Toast generado en servicio
             this.toastService.presentToast("Usuario creado correctamente");
             this.user="";
@@ -218,7 +218,7 @@ nivel = [
             this.nuevosDatos="";
             this.router.navigateByUrl('/home');
           }, error => {
-            console.log(error);
+            //console.log(error);
             //Toast generado en servicio
             this.toastService.presentToast("Formato E-mail o contraseña erroneo");
             });
@@ -238,7 +238,7 @@ nivel = [
 
   async onClickSelectImage(){
     this.userAlumno.id=this.db.createId();
-    console.log("Seleccionar imagen");
+    //console.log("Seleccionar imagen");
     const modal = await this.modalController.create({
       component: GaleryComponent,
       cssClass: "gallery-modal",

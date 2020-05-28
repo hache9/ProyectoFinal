@@ -25,17 +25,17 @@ export class FilterempresasadminComponent implements OnInit {
     private modalController:ModalController) { }
 
   ngOnInit() {
-    console.log(sessionStorage.getItem("userId"));
+    //console.log(sessionStorage.getItem("userId"));
     let alumnoCollection:AngularFirestoreCollection=this.db.collection<UserEmpresa>("empresa");
     alumnoCollection.valueChanges().subscribe(res=>{
       this.empresas=res;
-      console.log(res);
+      //console.log(res);
     })
   }
 
   onClickFilterAccept(){
     this.empresaFiltered = this.empresas;
-    console.log(this.empresaFiltered);
+    //console.log(this.empresaFiltered);
 
     if(this.filtrarEmail.trim()!=""){
       let filtroEmail = this.filtrarEmail.trim(); 
@@ -65,7 +65,7 @@ export class FilterempresasadminComponent implements OnInit {
     }
    
 
-    console.log(this.empresaFiltered);
+    //console.log(this.empresaFiltered);
 
     this.router.navigateByUrl('mostrarempresasadmin');
 

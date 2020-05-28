@@ -109,14 +109,13 @@ export class GaleryComponent implements OnInit {
 
      }, (err) => {
       // Handle error
-      console.log(err);
+      //console.log(err);
      });
   }
 
   onClickMantenerFoto(){
-    console.log(this.userAlumno.imagen);
+    //console.log(this.userAlumno.imagen);
     if(this.userAlumno.imagen.trim()==""){
-      console.log("Hola");
       this.userAlumno.imagen="../../assets/img/noimage.png";
     }
     this.modalController.dismiss(this.userAlumno.imagen);

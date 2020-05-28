@@ -88,7 +88,7 @@ export class RegisterempresaPage implements OnInit {
       if(this.nuevoCif.length!=9){
         this.cifInvalido="Por favor introduce 9 carácteres válidos";  
       }else if(this.nuevoCif.length==9){
-        console.log(this.nuevoCif.length);
+        //console.log(this.nuevoCif.length);
         this.cifInvalido="";
       } 
     }
@@ -104,7 +104,7 @@ export class RegisterempresaPage implements OnInit {
       if(this.nuevoCp.toString().length!=5){
         this.cpInvalido="Por favor introduce 5 carácteres numéricos";  
       }else if(this.nuevoCp.toString().length==5){
-        console.log(this.nuevoCp.toString().length);
+        //console.log(this.nuevoCp.toString().length);
         this.cpInvalido="";
       }
     }
@@ -120,24 +120,24 @@ export class RegisterempresaPage implements OnInit {
       if(this.nuevoTelefono.toString().length!=9){
         this.telfInvalido="Por favor introduce 9 carácteres numéricos";  
       }else if(this.nuevoTelefono.toString().length==9){
-        console.log(this.nuevoTelefono.toString().length);
+        //console.log(this.nuevoTelefono.toString().length);
         this.telfInvalido="";
       }
     }
     if(this.user.trim()!="" && this.pass.trim()!="" && this.nuevoNombreEmpresa.trim()!="" && this.nuevoCif.length==9 && this.nuevaCalle.trim()!="" && this.nuevoCp.toString().length==5 && this.nuevaLocalidad.trim()!="" && this.nuevoTelefono.toString().length==9){
-      console.log(this.user);
-      console.log(this.pass);
+      //console.log(this.user);
+      //console.log(this.pass);
       if(this.checkEmpresa==true && this.empresaPass.trim()==""){
         //Toast generado en servicio
         this.toastService.presentToast("Contraseña empresa vacía.");
       }else{
 
         if(this.checkEmpresa==true && this.empresaPass==this.empresaPassVerify){
-          console.log(this.checkEmpresa);
-          console.log(this.checkAdmin);
+          //console.log(this.checkEmpresa);
+          //console.log(this.checkAdmin);
           
           this.service.createUserEmpresa(this.user.toLowerCase(), this.pass, this.nuevoNombreEmpresa, this.nuevoCif, this.nuevaCalle, this.nuevoCp, this.nuevaLocalidad, this.nuevoTelefono).then(() => {
-            console.log("Usuario Empresa creado correctamente");
+            //console.log("Usuario Empresa creado correctamente");
             //Toast generado en servicio
             this.toastService.presentToast("Usuario Empresa creado correctamente");
             this.user="";
@@ -146,7 +146,7 @@ export class RegisterempresaPage implements OnInit {
             this.router.navigateByUrl('/home');
 
           }, error => {
-            console.log(error);
+            //console.log(error);
             //Toast generado en servicio
             this.toastService.presentToast("Introduce un formato de email correcto");
           });

@@ -28,17 +28,17 @@ export class FilteralumnosadminComponent implements OnInit {
     private modalController:ModalController) { }
 
   ngOnInit() {
-    console.log(sessionStorage.getItem("userId"));
+    //console.log(sessionStorage.getItem("userId"));
     let alumnoCollection:AngularFirestoreCollection=this.db.collection<User>("alumno");
     alumnoCollection.valueChanges().subscribe(res=>{
       this.alumnos=res;
-      console.log(res);
+      //console.log(res);
     })
   }
 
   onClickFilterAccept(){
     this.alumnoFiltered = this.alumnos;
-    console.log(this.alumnoFiltered);
+    //console.log(this.alumnoFiltered);
 
     if(this.filtrarNombre.trim()!=""){
       let filtroNombre = this.filtrarNombre.trim(); 
@@ -59,7 +59,7 @@ export class FilteralumnosadminComponent implements OnInit {
       });    
     }
     if(this.filtrarFormacion.trim()!=""){
-      console.log("hola");
+      //console.log("hola");
       let filtroFormacion = this.filtrarFormacion.trim(); 
       this.alumnoFiltered = this.alumnoFiltered.filter(function(item:any){
         return item.userInfo.formacion.toLowerCase().includes(filtroFormacion.toLowerCase());
@@ -101,7 +101,7 @@ export class FilteralumnosadminComponent implements OnInit {
       this.modalController.dismiss(this.alumnos);
     }
 
-    console.log(this.alumnoFiltered);
+    //console.log(this.alumnoFiltered);
 
     this.router.navigateByUrl('mostraralumnosadmin');
 

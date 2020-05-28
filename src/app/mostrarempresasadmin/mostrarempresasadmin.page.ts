@@ -32,7 +32,7 @@ export class MostrarempresasadminPage implements OnInit {
       )
   }
   mostrarEmpresa(empresa:UserEmpresa){
-    console.log(empresa);
+    //console.log(empresa);
     this.router.navigate(['mostrarempresa', {userEmpresa: JSON.stringify(empresa)}]);
   }
 
@@ -45,7 +45,7 @@ export class MostrarempresasadminPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            //console.log('Confirm Cancel');
           }
         }, 
         {
@@ -57,7 +57,7 @@ export class MostrarempresasadminPage implements OnInit {
     ]
    });
     await edit.present();
-    console.log(empresa);
+    //console.log(empresa);
   }
 
   async onClickBorrarEmpresa(empresa:UserEmpresa){
@@ -69,7 +69,7 @@ export class MostrarempresasadminPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            //console.log('Confirm Cancel');
           }
         }, 
         {
@@ -82,7 +82,7 @@ export class MostrarempresasadminPage implements OnInit {
     ]
    });
     await del.present();
-    console.log(empresa);
+    //console.log(empresa);
   }
 
   async onClickFilter(){

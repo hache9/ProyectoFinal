@@ -31,8 +31,8 @@ export class MostraralumnoPage implements OnInit {
     private EmailComposer:EmailComposer) {
     this.routeParams.params.subscribe(params =>{
       this.userAlumno=JSON.parse(params['userAlumno']);
-      console.log(this.userAlumno);
-      console.log(params);
+      //console.log(this.userAlumno);
+      //console.log(params);
       this.alumnoImagen=this.userAlumno.imagen;
       this.alumnoMail=this.userAlumno.mail;
       this.alumnoNombre=this.userAlumno.nombreyapellidos;
@@ -51,7 +51,7 @@ export class MostraralumnoPage implements OnInit {
   }
 
   onClickEmail(){
-    console.log(this.EmailComposer);
+    //console.log(this.EmailComposer);
     this.EmailComposer.open({
       to: this.alumnoMail,
     })

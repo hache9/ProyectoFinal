@@ -39,7 +39,7 @@ export class FavoritosPage implements OnInit {
   }
 
   showAlumno(userAlumno:UserAlumno){
-    console.log(userAlumno);
+    //console.log(userAlumno);
     this.router.navigate(['mostraralumno', {userAlumno: JSON.stringify(userAlumno)}]);
   }
 
@@ -63,7 +63,7 @@ export class FavoritosPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            //console.log('Confirm Cancel');
           }
         }, 
         {

@@ -84,7 +84,7 @@ nivel = [
     private alertController: AlertController) {
     this.routeParams.params.subscribe(params =>{
       this.alumno=JSON.parse(params['userAlumno']);
-      console.log(this.alumno);
+      //console.log(this.alumno);
       this.alumnoImagen=this.alumno.imagen;
       this.textNombre=this.alumno.nombreyapellidos;
       this.textEdad=this.alumno.edad;
@@ -101,31 +101,13 @@ nivel = [
 
   ngOnInit() {
     this.expBool=this.alumno.experiencia;
-    console.log(this.textNivel);
-    //this.isChecked=this.isRadioChecked();
-    console.log(this.isChecked);
+    //console.log(this.textNivel);
+    //console.log(this.isChecked);
   }
-
-  /*isRadioChecked(){
-    switch(this.textNivel){
-      case "A1":
-        return true;
-      case "A2":
-        return true;
-      case "B1":
-        return true;
-      case "B2":
-        return true;
-      case "C1":
-        return true;
-      case "C2":
-        return true;
-    }
-  }*/
 
   radioGroupChange(event) {
     this.textNivel = event.detail.value;
-    console.log(this.textNivel);
+    //console.log(this.textNivel);
   }
 
   cambiarNivelIdioma(){
@@ -222,14 +204,14 @@ nivel = [
         empresa:false
       }      
       this.userService.editUserAlumno(this.userEdited).then(() => {
-        console.log("Usuario editado correctamente");
+        //console.log("Usuario editado correctamente");
         //Toast generado en servicio
         this.toastService.presentToast("Usuario editado correctamente");
         //this.user="";
         //this.pass="";
         this.router.navigate(['principalalumno', {userAlumno: JSON.stringify(this.userEdited)}]);
       }, error => {
-        console.log(error);
+        //(error);
         //Toast generado en servicio
         this.toastService.presentToast("Error al editar el Usuario");
         });
@@ -249,7 +231,7 @@ nivel = [
   }
 
   async onClickSelectImage(){
-    console.log("Seleccionar imagen");
+    //console.log("Seleccionar imagen");
     const modal = await this.modalController.create({
       component: GaleryComponent,
       cssClass: "gallery-modal",
@@ -271,7 +253,7 @@ nivel = [
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            //console.log('Confirm Cancel');
           }
         }, 
         {
