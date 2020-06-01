@@ -7,12 +7,12 @@
     <ion-buttons slot="end">
       <ion-icon id="mail" name="mail" (click)="onClickEmail()"></ion-icon>
     </ion-buttons>
-    
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+
   <ion-item>
     <img id="img" src="{{alumnoImagen}}">
   </ion-item>
@@ -33,24 +33,24 @@
     <h2><b>Curso:</b> {{alumnoCurso}}</h2>
   </ion-item>
 
-  <ion-item>  
+  <ion-item>
     <h2><b>Formacion:</b> {{alumnoFormacion}}</h2>
   </ion-item>
 
-  <ion-item *ngIf="expBool"> 
+  <ion-item *ngIf="expBool">
     <h2><b>Experiencia:</b> {{alumnoExperiencia}}</h2>
   </ion-item>
 
-  <ion-item>  
+  <ion-item>
     <h2><b>Idiomas:</b> {{alumnoIdiomas}}</h2>
   </ion-item>
 
-  <ion-item>  
+  <ion-item>
     <h2><b>Nivel:</b> {{alumnoNivel}}</h2>
   </ion-item>
 
-  <ion-item>  
+  <ion-item>
     <h2><b>Datos:</b> {{alumnoDatos}}</h2>
   </ion-item>
-  
+
 </ion-content>

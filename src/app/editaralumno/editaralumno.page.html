@@ -14,7 +14,8 @@
   </ion-item>
 
   <ion-item>
-    <ion-label >Nombre y apellidos:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Nombre y apellidos:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="textNombre"></ion-input>
@@ -22,7 +23,8 @@
   <p class="red">{{nombreVacio}}</p>
 
   <ion-item>
-    <ion-label >Edad:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Edad:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="number" [(ngModel)]="textEdad"></ion-input>
@@ -30,7 +32,8 @@
   <p class="red">{{edadVacia}}</p>
 
   <ion-item>
-    <ion-label>Curso:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Curso:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="textCurso"></ion-input>
@@ -38,7 +41,8 @@
   <p class="red">{{cursoVacio}}</p>
 
   <ion-item>
-    <ion-label>Formación académica:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Formación académica:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="textFormacion"></ion-input>
@@ -59,14 +63,15 @@
   <p class="red">{{tiempoVacio}}</p>
 
   <ion-item>
-    <ion-label>Idiomas:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Idiomas:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="textIdiomas"></ion-input>
   </ion-item>
   <p class="red">{{idiomasVacio}}</p>
 
-  
+
   <ion-item>
     <ion-label>Nivel Actual: {{nivelActual}}</ion-label>
   </ion-item>
@@ -77,9 +82,7 @@
   </ion-item>
 
   <ion-list *ngIf="nivelBool">
-    <ion-radio-group  allow-empty-selection = "true"
-    name="radio-group"
-    (ionChange)="radioGroupChange($event)">
+    <ion-radio-group allow-empty-selection="true" name="radio-group" (ionChange)="radioGroupChange($event)">
       <ion-list-header>
         <ion-label>Nivel:</ion-label>
       </ion-list-header>
@@ -93,7 +96,8 @@
   <p class="red">{{nivelVacio}}</p>
 
   <ion-item>
-  <ion-label>Otros datos de interés:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Otros datos de interés:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="textDatos"></ion-input>

@@ -20,16 +20,18 @@
   <p class="red">{{passfail}}</p>
 
   <ion-item>
-    <ion-label >Nombre:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Nombre:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="nuevoNombreEmpresa"></ion-input>
   </ion-item>
   <p class="red">{{nombreVacio}}</p>
 
-  
+
   <ion-item>
-    <ion-label>CIF formato tipo: "Z87654321":<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>CIF formato tipo: "Z87654321":<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" maxlength="9" [(ngModel)]="nuevoCif"></ion-input>
@@ -38,7 +40,8 @@
   <p class="red">{{cifInvalido}}</p>
 
   <ion-item>
-    <ion-label>Calle:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Calle:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="nuevaCalle"></ion-input>
@@ -46,7 +49,8 @@
   <p class="red">{{calleVacia}}</p>
 
   <ion-item>
-    <ion-label >Código Postal:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Código Postal:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="number" [(ngModel)]="nuevoCp"></ion-input>
@@ -55,7 +59,8 @@
   <p class="red">{{cpInvalido}}</p>
 
   <ion-item>
-    <ion-label>Localidad:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Localidad:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="nuevaLocalidad"></ion-input>
@@ -63,21 +68,23 @@
   <p class="red">{{localidadVacia}}</p>
 
   <ion-item>
-    <ion-label>Telefono<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Telefono<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="number" [(ngModel)]="nuevoTelefono"></ion-input>
   </ion-item>
   <p class="red">{{telefonoVacio}}</p>
   <p class="red">{{telfInvalido}}</p>
-  
+
 
   <ion-item>
     <ion-label>Empresa</ion-label>
     <ion-checkbox (ionChange)="setEmpresa()" checked={{checkEmpresa}} [(ngModel)]="empresa" slot="start"></ion-checkbox>
   </ion-item>
   <ion-item>
-    <ion-input type="{{tipopass}}" placeholder="Empresa Password" expand="short" [(ngModel)]="empresaPass" *ngIf="empresa"></ion-input>
+    <ion-input type="{{tipopass}}" placeholder="Empresa Password" expand="short" [(ngModel)]="empresaPass"
+      *ngIf="empresa"></ion-input>
   </ion-item>
   <ion-button expand="block" (click)="onClickRegistrarEmpresa()">Registrar Empresa</ion-button>
 </ion-content>

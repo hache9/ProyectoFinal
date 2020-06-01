@@ -11,14 +11,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-item-sliding *ngFor="let alumno of alumnosListaFav">  
-    <ion-item (click)="showAlumno(alumno.userInfo)">             
-        <ion-label>
-          <h1>{{alumno.userInfo.nombreyapellidos}}</h1>
-          <h2>{{alumno.userInfo.curso}}</h2>
-          <p id="info">Pulsa para ver la información</p>
-        </ion-label>
-        <img id="img" src="{{alumno.userInfo.imagen}}">
+  <ion-item-sliding *ngFor="let alumno of alumnosListaFav">
+    <ion-item (click)="showAlumno(alumno.userInfo)">
+      <ion-label>
+        <h1>{{alumno.userInfo.nombreyapellidos}}</h1>
+        <h2>{{alumno.userInfo.curso}}</h2>
+        <p id="info">Pulsa para ver la información</p>
+      </ion-label>
+      <img id="img" src="{{alumno.userInfo.imagen}}">
     </ion-item>
 
     <ion-item-options side="end" class="centrar">

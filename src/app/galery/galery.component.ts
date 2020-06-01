@@ -1,10 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
-import { ImagePicker } from '@ionic-native/image-picker/ngx';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { UserAlumno } from '../models/userAlumno.interface';
-import { ModalController, LoadingController, NavParams } from '@ionic/angular';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  finalize
+} from 'rxjs/operators';
+import {
+  ImagePicker
+} from '@ionic-native/image-picker/ngx';
+import {
+  AngularFireStorage
+} from '@angular/fire/storage';
+import {
+  UserAlumno
+} from '../models/userAlumno.interface';
+import {
+  ModalController,
+  LoadingController,
+  NavParams
+} from '@ionic/angular';
+import {
+  Camera,
+  CameraOptions
+} from '@ionic-native/camera/ngx';
 
 
 @Component({
@@ -15,11 +33,11 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class GaleryComponent implements OnInit {
 
   constructor(private imagePicker: ImagePicker,
-    private storage:AngularFireStorage,
-    private modalController:ModalController,
-    private loadingController:LoadingController,
-    private navParams:NavParams,
-    private camera: Camera) { }
+    private storage: AngularFireStorage,
+    private modalController: ModalController,
+    private loadingController: LoadingController,
+    private navParams: NavParams,
+    private camera: Camera) {}
 
   /*optionsGallery = {
     maximumImagesCount: 1,
@@ -34,18 +52,18 @@ export class GaleryComponent implements OnInit {
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    saveToPhotoAlbum:true,
+    saveToPhotoAlbum: true,
     correctOrientation: true
   }
 
-  userAlumno:UserAlumno;
-  imageUrl:string;
-  
-  ngOnInit() {
-    this.userAlumno=JSON.parse(this.navParams.get('alumno'));
-}
+  userAlumno: UserAlumno;
+  imageUrl: string;
 
-  onClickClose(){
+  ngOnInit() {
+    this.userAlumno = JSON.parse(this.navParams.get('alumno'));
+  }
+
+  onClickClose() {
     this.modalController.dismiss("../../assets/img/noimage.png");
   }
 
@@ -80,7 +98,7 @@ export class GaleryComponent implements OnInit {
       }, (err) => { alert(err) });
   }*/
 
-  onClickOpenCamera(){
+  onClickOpenCamera() {
     this.camera.getPicture(this.optionsCamera).then(async (imageData) => {
       const loading = await this.loadingController.create({
         message: 'Por favor, espera...',
@@ -90,35 +108,35 @@ export class GaleryComponent implements OnInit {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-  
+
       let photoName = `${this.userAlumno.id}/${this.userAlumno.id}_photo`;
-  
+
       const fileRef = this.storage.ref(photoName);
-  
-      const task = fileRef.putString(base64Image,'data_url');
-  
-       task.snapshotChanges().pipe(
-         finalize(() => {
-           fileRef.getDownloadURL().subscribe(async url => {
-            this.imageUrl=url;
+
+      const task = fileRef.putString(base64Image, 'data_url');
+
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(async url => {
+            this.imageUrl = url;
             //alert(this.imageUrl);
             loading.dismiss();
             this.modalController.dismiss(this.imageUrl);
-           })
-         })).subscribe();
+          })
+        })).subscribe();
 
-     }, (err) => {
+    }, (err) => {
       // Handle error
       //console.log(err);
-     });
+    });
   }
 
-  onClickMantenerFoto(){
+  onClickMantenerFoto() {
     //console.log(this.userAlumno.imagen);
-    if(this.userAlumno.imagen.trim()==""){
-      this.userAlumno.imagen="../../assets/img/noimage.png";
+    if (this.userAlumno.imagen.trim() == "") {
+      this.userAlumno.imagen = "../../assets/img/noimage.png";
     }
     this.modalController.dismiss(this.userAlumno.imagen);
-    
+
   }
 }

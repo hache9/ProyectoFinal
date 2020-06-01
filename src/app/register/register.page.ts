@@ -1,7 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from './../services/authentication.service';
-import { Router } from '@angular/router';
-import { ToastService } from '../services/toast.service';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  AuthenticationService
+} from './../services/authentication.service';
+import {
+  Router
+} from '@angular/router';
+import {
+  ToastService
+} from '../services/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -12,20 +21,19 @@ export class RegisterPage implements OnInit {
 
 
   constructor(
-    private router:Router) { }
+    private router: Router) {}
 
-  ngOnInit() {
-  }
-  
-  onClickRegisterAdmin(){
+  ngOnInit() {}
+
+  onClickRegisterAdmin() {
     this.router.navigateByUrl('/registeradmin');
   }
 
-  onClickRegisterEmpresa(){
+  onClickRegisterEmpresa() {
     this.router.navigateByUrl('/registerempresa');
   }
 
-  onClickRegisterAlumno(){
+  onClickRegisterAlumno() {
     this.router.navigateByUrl('/registeralumno');
   }
 }

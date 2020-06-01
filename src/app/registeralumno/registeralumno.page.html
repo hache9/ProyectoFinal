@@ -12,7 +12,7 @@
     <ion-input placeholder="EMAIL" [(ngModel)]="user" expand="short"></ion-input>
   </ion-item>
   <p class="red">{{userfail}}</p>
-  
+
   <ion-item>
     <ion-input type="{{tipopass}}" placeholder="CONTRASEÑA" [(ngModel)]="pass"></ion-input>
     <ion-icon id="ojo" name="eye" (click)="onClickEye()"></ion-icon>
@@ -24,7 +24,8 @@
   </ion-item>
 
   <ion-item>
-    <ion-label >Nombre y apellidos:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Nombre y apellidos:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="nuevoNombre"></ion-input>
@@ -32,7 +33,8 @@
   <p class="red">{{nombreVacio}}</p>
 
   <ion-item>
-    <ion-label >Edad:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Edad:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="number" [(ngModel)]="nuevaEdad"></ion-input>
@@ -40,7 +42,8 @@
   <p class="red">{{edadVacia}}</p>
 
   <ion-item>
-    <ion-label >Curso:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Curso:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="nuevoCurso"></ion-input>
@@ -48,7 +51,8 @@
   <p class="red">{{cursoVacio}}</p>
 
   <ion-item>
-    <ion-label>Formación académica:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Formación académica:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="nuevaFormacion"></ion-input>
@@ -67,7 +71,8 @@
   <p class="red">{{tiempoVacio}}</p>
 
   <ion-item>
-    <ion-label>Idiomas:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Idiomas:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="nuevosIdiomas"></ion-input>
@@ -75,9 +80,7 @@
   <p class="red">{{idiomasVacio}}</p>
 
   <ion-list>
-    <ion-radio-group  allow-empty-selection = "true"
-    name="radio-group"
-    (ionChange)="radioGroupChange($event)">
+    <ion-radio-group allow-empty-selection="true" name="radio-group" (ionChange)="radioGroupChange($event)">
       <ion-list-header>
         <ion-label>Nivel:</ion-label>
       </ion-list-header>
@@ -91,7 +94,8 @@
   <p class="red">{{nivelVacio}}</p>
 
   <ion-item>
-  <ion-label>Otros datos de interés:<ion-text color="danger">*</ion-text></ion-label>
+    <ion-label>Otros datos de interés:<ion-text color="danger">*</ion-text>
+    </ion-label>
   </ion-item>
   <ion-item>
     <ion-input required type="text" [(ngModel)]="nuevosDatos"></ion-input>

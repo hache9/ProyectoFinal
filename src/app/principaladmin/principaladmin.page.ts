@@ -1,5 +1,10 @@
-import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import {
+  Router
+} from '@angular/router';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 
 @Component({
   selector: 'app-principaladmin',
@@ -8,19 +13,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrincipaladminPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  onClickAbrirEmpresas(){
+  onClickAbrirEmpresas() {
     this.router.navigateByUrl("mostrarempresasadmin");
   }
-  onClickAbrirAlumnos(){
+  onClickAbrirAlumnos() {
     this.router.navigateByUrl("mostraralumnosadmin");
   }
 
-  onClickClose(){
+  onClickClose() {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("userId");
     this.router.navigateByUrl('/home');

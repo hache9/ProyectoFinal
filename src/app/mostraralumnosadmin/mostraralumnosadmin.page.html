@@ -11,14 +11,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-item-sliding *ngFor="let alumno of alumnosLista">  
-    <ion-item (click)="mostrarAlumno(alumno.userInfo)">             
-        <ion-label>
-          <h1>{{alumno.userInfo.nombreyapellidos}}</h1>
-          <h1>Curso: {{alumno.userInfo.curso}}</h1>
-          <p id="info">Pulsa para ver la información</p>
-        </ion-label>
-        <img id="img" src="{{alumno.userInfo.imagen}}">
+  <ion-item-sliding *ngFor="let alumno of alumnosLista">
+    <ion-item (click)="mostrarAlumno(alumno.userInfo)">
+      <ion-label>
+        <h1>{{alumno.userInfo.nombreyapellidos}}</h1>
+        <h1>Curso: {{alumno.userInfo.curso}}</h1>
+        <p id="info">Pulsa para ver la información</p>
+      </ion-label>
+      <img id="img" src="{{alumno.userInfo.imagen}}">
     </ion-item>
 
     <ion-item-options side="end" class="centrar">
@@ -27,11 +27,11 @@
         Editar
       </ion-item-option>
 
-      <ion-item-option color="danger" expandable  (click)="onClickBorrarAlumno(alumno.userInfo)">
+      <ion-item-option color="danger" expandable (click)="onClickBorrarAlumno(alumno.userInfo)">
         <ion-icon name="trash" slot="end"></ion-icon>
-          Borrar
+        Borrar
       </ion-item-option>
-        
+
     </ion-item-options>
   </ion-item-sliding>
 
